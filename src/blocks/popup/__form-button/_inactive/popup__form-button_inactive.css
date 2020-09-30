@@ -1,0 +1,9 @@
+.popup__form-button_inactive {
+  background-color: #fff;
+  border: 1px solid #c4c4c4;
+  box-sizing: border-box;
+  border-radius: 2px;
+  pointer-events: none;
+  transition: none;
+  color: #c4c4c4;
+}

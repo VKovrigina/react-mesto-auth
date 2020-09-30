@@ -1,0 +1,39 @@
+@import url(./__close-button/popup__close-button.css);
+@import url(./__form-button/popup__form-button.css);
+@import url(./__form/popup__form.css);
+@import url(./__input/popup__input.css);
+@import url(./__input/_type/popup__input_type_error.css);
+@import url(./__input-error/popup__input-error.css);
+@import url(./__title/popup__title.css);
+@import url(./__container/popup__container.css);
+@import url(./__img/popup__img.css);
+@import url(./__photo-title/popup__photo-title.css);
+@import url(./_photo/popup_photo.css);
+@import url(./_form/popup_form.css);
+
+
+.popup {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: visibility 0.5s, opacity 0.5s ease;
+  -moz-transition: visibility 0.5s, opacity 0.5s ease;
+  -webkit-transition: visibility 0.5s, opacity 0.5s ease;
+  -o-transition: visibility 0.5s, opacity 0.5s ease;
+  -ms-transition: visibility 0.5s, opacity 0.5s ease;
+  visibility: hidden;
+  opacity: 0;
+}
+
+@media all and (-webkit-min-device-pixel-ratio:0) and (min-resolution: .001dpcm) {
+  .popup {
+    transition: visibility 0.5s, opacity 0.5s ease;
+    -webkit-transition: visibility 0.5s, opacity 0.5s ease;
+  }
+}
+

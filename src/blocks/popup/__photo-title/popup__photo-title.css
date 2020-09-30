@@ -1,0 +1,11 @@
+.popup__photo-title {
+  color: #fff;
+  font-family: 'Inter' 'Arial', 'Helvetica', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  padding: 0;
+  margin: 10px 0 0 0;
+  max-width: 75vw;
+}

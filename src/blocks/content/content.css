@@ -1,0 +1,25 @@
+.content {
+  max-width: 882px;
+  width: 100%;
+  position: relative;
+  margin: 0 auto;
+  padding: 36.25px 0 0 0;
+}
+
+@media screen and (max-width: 1100px) {
+  .content {
+    width: 68.9%;
+  }
+}
+
+@media screen and (max-width: 930px) {
+  .content {
+    width: 88%;
+  }
+}
+
+@media screen and (max-width: 310px) {
+  .content {
+    width: 95%;
+  }
+}
