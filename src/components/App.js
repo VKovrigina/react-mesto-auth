@@ -7,8 +7,11 @@ import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
 import DeleteCardPopup from './DeleteCardPopup';
+import Register from './Register';
+import Login from './Login';
 import api from '../utils/api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
+import { Route, Switch } from 'react-router-dom';
 
 function App() {
 
@@ -162,6 +165,16 @@ function App() {
 
       <Header />
 
+      {/* <Switch>
+
+      <Route path="/sign-up">
+        <Register />
+      </Route>
+
+      <Route path="/sign-in">
+        <Login />
+      </Route> */}
+
       {/** MAIN */}
       { currentUser && cards && <Main 
       onEditAvatar={handleEditAvatarClick}
@@ -205,6 +218,8 @@ function App() {
         isOpen={isDeleteCardPopupOpen}
         onSubmit={handleCardDelete}>
       </DeleteCardPopup>
+
+      {/* </Switch> */}
 
       <Footer />
 
