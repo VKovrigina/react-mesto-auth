@@ -2,3 +2,11 @@
   background: #fff;
   color: #000;
 }
+
+.form__button_type_light:hover {
+  background-color: rgba(200, 200, 200, 0.8);
+}
+
+.form__button_type_light:focus {
+  background-color: rgba(200, 200, 200, 0.8);
+}

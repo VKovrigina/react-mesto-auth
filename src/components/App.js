@@ -165,7 +165,7 @@ function App() {
 
       <Header />
 
-      {/* <Switch>
+      <Switch>
 
       <Route path="/sign-up">
         <Register />
@@ -173,7 +173,7 @@ function App() {
 
       <Route path="/sign-in">
         <Login />
-      </Route> */}
+      </Route>
 
       {/** MAIN */}
       { currentUser && cards && <Main 
@@ -219,9 +219,9 @@ function App() {
         onSubmit={handleCardDelete}>
       </DeleteCardPopup>
 
-      {/* </Switch> */}
-
       <Footer />
+
+      </Switch>
 
     </div>
     </CurrentUserContext.Provider>

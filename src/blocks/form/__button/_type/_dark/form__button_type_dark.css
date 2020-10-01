@@ -2,3 +2,11 @@
   background: #000;
   color: #fff;
 }
+
+.form__button_type_dark:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.form__button_type_dark:focus {
+  background-color: rgba(0, 0, 0, 0.8);
+}

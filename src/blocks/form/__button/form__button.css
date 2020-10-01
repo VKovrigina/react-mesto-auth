@@ -15,14 +15,6 @@
   transition: background-color 300ms linear;
 }
 
-.form__button:hover {
-  background-color: rgba(0, 0, 0, 0.8);
-}
-
-.form__button:focus {
-  background-color: rgba(0, 0, 0, 0.8);
-}
-
 @media screen and (max-width: 600px) {
   .form__button {
     height: 40px;

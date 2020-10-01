@@ -3,6 +3,7 @@
 @import url('./__button/_type/_dark/_inactive/form__button_type_dark_inactive.css');
 @import url('./__button/_type/_light/form__button_type_light.css');
 @import url('./__button/_type/_light/_inactive/form__button_type_light_inactive.css');
+@import url('./__button/_type/form__button_type_login.css');
 @import url('./__span-error/form__span-error.css');
 @import url('./__input/form__input.css');
 @import url('./__input/_type/form__input_type_dark.css');
@@ -11,8 +12,11 @@
 @import url('./__title/form__title.css');
 @import url('./__title/_type/form__title_type_dark.css');
 @import url('./__title/_type/form__title_type_light.css');
+@import url('./__question/form__question.css');
+@import url('./__link/form__link.css');
 @import url('./_type/form_type_dark.css');
 @import url('./_type/form_type_light.css');
+@import url('./_type/form_type_full-page.css');
 
 .form {
   max-width: 430px;
@@ -24,13 +28,11 @@
   align-items: center;
   align-self: start;
   justify-self: center;
-  margin: 0;
 }
 
 @media screen and (max-width: 600px) {
   .form {
     max-width: 240px;
     min-width: 240px;
-    margin: 0;
   }
 }
