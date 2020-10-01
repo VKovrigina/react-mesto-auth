@@ -18,7 +18,7 @@ function DeleteCardPopup({onClose, isOpen, onSubmit, closeByEscAndOverlay}) {
         onClose={onClose}
         isOpen={isOpen}
         onSubmit={onSubmit}>
-            <button className="popup__form-button" type="submit" aria-label="Да" ref={buttonFocusRef}>Да</button>
+            <button className="form__button form__button_type_dark" type="submit" aria-label="Да" ref={buttonFocusRef}>Да</button>
     </PopupWithForm>        
     );
 }

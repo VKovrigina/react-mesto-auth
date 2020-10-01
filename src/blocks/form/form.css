@@ -1,23 +1,23 @@
 @import url('./__button/form__button.css');
-@import url('./__button/_type/_login/form__button_type_login.css');
-@import url('./__button/_type/_login/_inactive/form__button_type_login_inactive.css');
-@import url('./__button/_type/_popup/form__button_type_popup.css');
-@import url('./__button/_type/_popup/_inactive/form__button_type_popup_inactive.css');
+@import url('./__button/_type/_dark/form__button_type_dark.css');
+@import url('./__button/_type/_dark/_inactive/form__button_type_dark_inactive.css');
+@import url('./__button/_type/_light/form__button_type_light.css');
+@import url('./__button/_type/_light/_inactive/form__button_type_light_inactive.css');
+@import url('./__span-error/form__span-error.css');
 @import url('./__input/form__input.css');
-@import url('./__input/_type/form__input_type_login.css');
-@import url('./__input/_type/form__input_type_popup.css');
+@import url('./__input/_type/form__input_type_dark.css');
+@import url('./__input/_type/form__input_type_light.css');
 @import url('./__input/_type/form__input_type_error.css');
 @import url('./__title/form__title.css');
-@import url('./_type/form_type_login.css');
-@import url('./_type/form_type_popup.css');
+@import url('./__title/_type/form__title_type_dark.css');
+@import url('./__title/_type/form__title_type_light.css');
+@import url('./_type/form_type_dark.css');
+@import url('./_type/form_type_light.css');
 
 .form {
   max-width: 430px;
   min-width: 430px;
   width: 100%;
-  background: #fff;
-  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
-  border-radius: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;

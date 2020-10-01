@@ -2,8 +2,7 @@ import React from 'react';
 
 function PopupWithForm({ 
   name, 
-  title, 
-  buttonText, 
+  title,
   children, 
   onClose, 
   isOpen, 
@@ -15,8 +14,10 @@ function PopupWithForm({
     closeByEscAndOverlay();
   })
 
+  // popup_${name}
+
   return (
-    <div className={`popup popup_${name} popup_form ${isOpen && `popup_open`}`}>
+    <div className={`popup popup_form ${isOpen && `popup_open`}`}>
     <div className="popup__container">
       <button 
         className="popup__close-button button" 
@@ -24,8 +25,8 @@ function PopupWithForm({
         aria-label="Закрыть"
         onClick= {onClose}>
       </button>
-      <form noValidate className={`popup__form popup__form_${name}`} name={name} method="get" action="#" onSubmit={onSubmit}>
-        <h2 className="popup__title">{title}</h2>
+      <form noValidate className="form form_type_light" name={name} method="get" action="#" onSubmit={onSubmit}>
+        <h2 className="form__title form__title_type_dark">{title}</h2>
         {children}
       </form>
     </div>

@@ -27,12 +27,12 @@ function EditAvatarPopup({onClose, isOpen, onUpdateAvatar, closeByEscAndOverlay}
         onChange={handleChange}
         type="url"
         name="avatar"
-        className='popup__input popup__input_type_avatar'
+        className="form__input form__input_type_dark"
         id="avatar-input"
         placeholder="https://..."
         required />
-        <span className="popup__input-error" id="avatar-input-error">{errors.avatar}</span>
-        <button className={`popup__form-button ${!isValid && 'popup__form-button_inactive'}`} type="submit" aria-label="Сохранить" disabled={!isValid}>Сохранить</button>
+        <span className="form__span-error" id="avatar-input-error">{errors.avatar || ''}</span>
+        <button className={`form__button form__button_type_dark ${!isValid && 'form__button_type_dark_inactive'}`} type="submit" aria-label="Сохранить" disabled={!isValid}>Сохранить</button>
     </PopupWithForm>
     );
 }
