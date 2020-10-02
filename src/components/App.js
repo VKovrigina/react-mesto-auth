@@ -174,7 +174,7 @@ function App() {
       <Route path="/sign-in">
         <Login />
       </Route>
-
+      <Route path="/">
       {/** MAIN */}
       { currentUser && cards && <Main 
       onEditAvatar={handleEditAvatarClick}
@@ -220,7 +220,7 @@ function App() {
       </DeleteCardPopup>
 
       <Footer />
-
+      </Route>
       </Switch>
 
     </div>

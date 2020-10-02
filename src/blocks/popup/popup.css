@@ -1,10 +1,10 @@
 @import url(./__close-button/popup__close-button.css);
-@import url(./__form-button/popup__form-button.css);
-@import url(./__form/popup__form.css);
-@import url(./__input/popup__input.css);
-@import url(./__input/_type/popup__input_type_error.css);
-@import url(./__input-error/popup__input-error.css);
-@import url(./__title/popup__title.css);
+/* @import url(./__form-button/popup__form-button.css);
+@import url(./__form/popup__form.css); */
+/* @import url(./__input/popup__input.css); */
+/* @import url(./__input/_type/popup__input_type_error.css);
+@import url(./__input-error/popup__input-error.css); */
+/* @import url(./__title/popup__title.css); */
 @import url(./__container/popup__container.css);
 @import url(./__img/popup__img.css);
 @import url(./__photo-title/popup__photo-title.css);

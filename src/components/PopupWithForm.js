@@ -26,7 +26,7 @@ function PopupWithForm({
         onClick= {onClose}>
       </button>
       <form noValidate className="form form_type_light" name={name} method="get" action="#" onSubmit={onSubmit}>
-        <h2 className="form__title form__title_type_dark">{title}</h2>
+        <h2 className="form__title form__title_type_dark form__title_position_left">{title}</h2>
         {children}
       </form>
     </div>
