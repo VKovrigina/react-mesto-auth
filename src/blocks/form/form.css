@@ -13,6 +13,7 @@
 @import url('./__title/_type/form__title_type_dark.css');
 @import url('./__title/_type/form__title_type_light.css');
 @import url('./__title/_position/form__title_position_left.css');
+@import url('./__title/_position/form__title_position_center.css');
 @import url('./__question/form__question.css');
 @import url('./__link/form__link.css');
 @import url('./_type/form_type_dark.css');
@@ -33,7 +34,7 @@
 
 @media screen and (max-width: 600px) {
   .form {
-    max-width: 240px;
+    /* max-width: 240px; */
     min-width: 240px;
   }
 }

@@ -25,7 +25,7 @@ function App() {
   const [isDeleteCardPopupOpen, setIsDeleteCardPopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState({});
   const [cardForDelete, setCardForDelete] = React.useState({});
-  const [isLoggedIn, setIsLoggedIn] = React.useState(false)
+  const [isLoggedIn, setIsLoggedIn] = React.useState(true)
 
   React.useEffect(() => {
     Promise.all([api.getUserInfo(), api.getInitialCards()])

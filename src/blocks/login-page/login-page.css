@@ -2,3 +2,10 @@
   height: 80vh;
   padding: 60px 0 0 0;
 }
+
+@media screen and (max-width: 600px) {
+  .login-page {
+    height: 70vh;
+    padding: 40px 0 0 0;
+  }
+}
