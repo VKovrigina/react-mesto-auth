@@ -1,5 +1,6 @@
 import React from 'react';
 import { useFormWithValidation } from '../hooks/useFormWithValidation';
+import { Link } from 'react-router-dom';
 
 function Login() {
 
@@ -33,8 +34,8 @@ function Login() {
         required />
       <span className="form__span-error">{errors.password || ''}</span>
       <button className={`form__button form__button_type_light form__button_type_login ${!isValid && 'form__button_type_light_inactive'}`} type="submit" aria-label="Войти" disabled={!isValid}>Войти</button>
-      <p className="form__question">Еще не зарегистрированы?
-        <a className="form__link"> Зарегистрироваться</a>
+      <p className="form__question">Еще не зарегистрированы?&nbsp;
+        <Link to="/sign-up" className="form__link">Зарегистрироваться</Link>
       </p>
 
     </form>
