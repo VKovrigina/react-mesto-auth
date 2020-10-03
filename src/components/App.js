@@ -10,8 +10,9 @@ import DeleteCardPopup from './DeleteCardPopup';
 import Register from './Register';
 import Login from './Login';
 import api from '../utils/api';
+import ProtectedRoute from './ProtectedRoute';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
   const [isDeleteCardPopupOpen, setIsDeleteCardPopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState({});
   const [cardForDelete, setCardForDelete] = React.useState({});
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false)
 
   React.useEffect(() => {
     Promise.all([api.getUserInfo(), api.getInitialCards()])
@@ -163,65 +165,74 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
     <div className="page">
 
-      <Header />
+    <Header />
 
       <Switch>
 
-      <Route path="/sign-up">
-        <Register />
-      </Route>
+        <Route path="/sign-up">
+          <Register />
+        </Route>
 
-      <Route path="/sign-in">
-        <Login />
-      </Route>
-      <Route path="/">
-      {/** MAIN */}
-      { currentUser && cards && <Main 
-      onEditAvatar={handleEditAvatarClick}
-      onEditProfile={handleEditProfileClick}
-      onAddPlace={handleAddPlaceClick}
-      onCardClick={handleCardClick}
-      initialCards={cards}
-      onCardLike={handleCardLike}
-      onCardDelete={handleDeleteCardClick}/>}
+        <Route path="/sign-in">
+          <Login />
+        </Route>
 
-      {/** EditProfilePopup */}
-      { currentUser && <EditProfilePopup
-        isOpen={isEditProfilePopupOpen}
-        onClose={closeAllPopups}
-        onUpdateUser={handleUpdateUser}
-        closeByEscAndOverlay={closePopupByEscAndOverlay}/>
-      }
+        <ProtectedRoute 
+        path="/" 
+        loggedIn={isLoggedIn} 
+        component={Main}
+        onEditAvatar={handleEditAvatarClick}
+        onEditProfile={handleEditProfileClick}
+        onAddPlace={handleAddPlaceClick}
+        onCardClick={handleCardClick}
+        initialCards={cards}
+        onCardLike={handleCardLike}
+        onCardDelete={handleDeleteCardClick} />
 
-      {/** EditAvatarPopup */}
-      { currentUser && <EditAvatarPopup
-        isOpen={isEditAvatarPopupOpen}
-        onClose={closeAllPopups}
-        onUpdateAvatar={handleUpdateAvatar}
-        closeByEscAndOverlay={closePopupByEscAndOverlay}/>
-      }
+        <ProtectedRoute 
+        path="/" 
+        loggedIn={isLoggedIn} 
+        component={Footer} />
 
-      <AddPlacePopup
-      isOpen={isAddPlacePopupOpen}
-      onClose={closeAllPopups}
-      onAddPlace={handleAddPlaceSubmit}
-      closeByEscAndOverlay={closePopupByEscAndOverlay}/>
+        <Route> 
+          {isLoggedIn ? <Redirect to="/" /> : <Redirect to="/sign-up" />}
+        </Route>
 
-      <ImagePopup card={selectedCard}
-      onClose={closeAllPopups}
-      isOpen={isPhotoPopupOpen}
-      closeByEscAndOverlay={closePopupByEscAndOverlay}/>
-
-      <DeleteCardPopup
-        closeByEscAndOverlay={closePopupByEscAndOverlay}
-        onClose={closeAllPopups}
-        isOpen={isDeleteCardPopupOpen}
-        onSubmit={handleCardDelete}>
-      </DeleteCardPopup>
-
-      <Footer />
-      </Route>
       </Switch>
+
+          {/** EditProfilePopup */}
+          { currentUser && <EditProfilePopup
+            isOpen={isEditProfilePopupOpen}
+            onClose={closeAllPopups}
+            onUpdateUser={handleUpdateUser}
+            closeByEscAndOverlay={closePopupByEscAndOverlay}/>
+          }
+
+          {/** EditAvatarPopup */}
+          { currentUser && <EditAvatarPopup
+            isOpen={isEditAvatarPopupOpen}
+            onClose={closeAllPopups}
+            onUpdateAvatar={handleUpdateAvatar}
+            closeByEscAndOverlay={closePopupByEscAndOverlay}/>
+          }
+
+          <AddPlacePopup
+          isOpen={isAddPlacePopupOpen}
+          onClose={closeAllPopups}
+          onAddPlace={handleAddPlaceSubmit}
+          closeByEscAndOverlay={closePopupByEscAndOverlay}/>
+
+          <ImagePopup card={selectedCard}
+          onClose={closeAllPopups}
+          isOpen={isPhotoPopupOpen}
+          closeByEscAndOverlay={closePopupByEscAndOverlay}/>
+
+          <DeleteCardPopup
+            closeByEscAndOverlay={closePopupByEscAndOverlay}
+            onClose={closeAllPopups}
+            isOpen={isDeleteCardPopupOpen}
+            onSubmit={handleCardDelete}>
+          </DeleteCardPopup>
 
     </div>
     </CurrentUserContext.Provider>
