@@ -8,7 +8,7 @@ function Register({ setIsLoggedIn }) {
   const [message, setMessage] = React.useState('');
   const history = useHistory();
 
-  const handleSubmit = (evt) => {
+  function handleSubmit (evt) {
     evt.preventDefault();
 
     apiAuth.register(values.email, values.password)
