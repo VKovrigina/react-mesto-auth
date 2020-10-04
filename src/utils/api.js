@@ -1,4 +1,4 @@
-import {apiOptions} from './constants'
+import { apiOptions, apiAuthOptions } from './constants'
 
 class Api {
   constructor(options) {
@@ -104,6 +104,36 @@ class Api {
   }
 }
 
+class ApiAuth {
+  constructor(options) {
+    this._baseUrl = options.baseUrl;
+    this._headers = options.headers;
+  }
+
+  _handleResponse(res) {
+    if (res.ok) {
+      return res.json();
+    } else {
+      return Promise.reject(res.status)
+    }
+  }
+
+  register(email, password) {
+    return fetch(`${this._baseUrl}/signup`,
+    {
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify({
+        'password': password,
+        'email': email,
+      })
+    })
+    .then(this._handleResponse)
+  }
+};
+
  
 const api = new Api(apiOptions);
-export default api;
+const apiAuth = new ApiAuth(apiAuthOptions);
+
+export { api, apiAuth };

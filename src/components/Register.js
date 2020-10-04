@@ -1,8 +1,30 @@
 import React from 'react';
 import { useFormWithValidation } from '../hooks/useFormWithValidation';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import { apiAuth } from '../utils/api';
 
 function Register() {
+
+  const [message, setMessage] = React.useState('');
+  const history = useHistory();
+
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+
+    apiAuth.register(values.email, values.password)
+      .then((res) => {
+        if (res.statusCode !== 400) {
+          setMessage('');
+          history.push('/sign-in');
+        } else {
+          setMessage('Что-то пошло не так!' || res.message[0].messages[0].message);
+        }
+      })
+      .catch(() => {
+        setMessage('Что-то пошло не так!');
+        console.log('Ошибка!')
+      });
+  };
 
   const {values, handleChange, errors, isValid, resetForm} = useFormWithValidation();
   React.useEffect(() => {
@@ -11,8 +33,9 @@ function Register() {
 
   return (
     <section className="login-page">
-    <form className="form form_type_dark form_type_full-page" noValidate>
+    <form className="form form_type_dark form_type_full-page" onSubmit={handleSubmit} noValidate>
       <h1 className="form__title form__title_type_light form__title_position_center">Регистрация</h1>
+      <h1 className="form__title form__title_type_light form__title_position_center">{message}</h1>
       <input
         value={values.email || ''}
         onChange={handleChange}

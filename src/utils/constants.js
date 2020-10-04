@@ -38,3 +38,11 @@ export  const apiOptions = {
     'Content-Type': 'application/json'
   }
 };
+
+export const apiAuthOptions = {
+  baseUrl: 'https://auth.nomoreparties.co',
+  headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+  }
+};
