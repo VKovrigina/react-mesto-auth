@@ -9,10 +9,10 @@ import AddPlacePopup from './AddPlacePopup';
 import DeleteCardPopup from './DeleteCardPopup';
 import Register from './Register';
 import Login from './Login';
-import { api } from '../utils/api';
+import { api, apiAuth } from '../utils/api';
 import ProtectedRoute from './ProtectedRoute';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch, Redirect, useHistory } from 'react-router-dom';
 
 function App() {
 
@@ -26,14 +26,16 @@ function App() {
   const [selectedCard, setSelectedCard] = React.useState({});
   const [cardForDelete, setCardForDelete] = React.useState({});
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const history = useHistory();
 
   React.useEffect(() => {
+    tokenCheck();
     Promise.all([api.getUserInfo(), api.getInitialCards()])
     .then(([userInfo, cardsInfo]) => {
       setCurrentUser(userInfo);
       setCards(cardsInfo);
     })
-    .catch(err => console.error(err))
+    .catch(err => console.error(err));
   },[]);
 
   function handleEditAvatarClick() {
@@ -68,6 +70,19 @@ function App() {
     setIsPhotoPopupOpen(false);
     setIsDeleteCardPopupOpen(false);
   }
+
+  function tokenCheck() {
+    let token = localStorage.getItem('token');
+    if (token) {
+      apiAuth.getContent(token)
+      .then((res) => {
+        if (res) {
+          setIsLoggedIn(true);
+          history.push('/');
+        }
+      });
+    }
+  };
 
   function closePopupByEscAndOverlay() {
     function handleEscClose(e) {
