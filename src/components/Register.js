@@ -3,7 +3,7 @@ import { useFormWithValidation } from '../hooks/useFormWithValidation';
 import { Link, useHistory } from 'react-router-dom';
 import { apiAuth } from '../utils/api';
 
-function Register() {
+function Register({ setIsLoggedIn }) {
 
   const [message, setMessage] = React.useState('');
   const history = useHistory();
@@ -15,7 +15,24 @@ function Register() {
       .then((res) => {
         if (res.statusCode !== 400) {
           setMessage('');
-          history.push('/sign-in');
+          console.log(res);
+
+          apiAuth.authorize(values.email, values.password)
+            .then((res) => {
+              if (res.token) {
+                setMessage('');
+                console.log(res);
+                setIsLoggedIn(true);
+                history.push('/');
+              } else {
+                setMessage('Что-то пошло не так!');
+              }
+            })
+            .catch(() => {
+              setMessage('Что-то пошло не так!');
+              console.log('Ошибка!')
+            });
+
         } else {
           setMessage('Что-то пошло не так!' || res.message[0].messages[0].message);
         }

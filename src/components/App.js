@@ -170,11 +170,11 @@ function App() {
       <Switch>
 
         <Route path="/sign-up">
-          <Register />
+          <Register setIsLoggedIn={setIsLoggedIn}/>
         </Route>
 
         <Route path="/sign-in">
-          <Login />
+          <Login setIsLoggedIn={setIsLoggedIn}/>
         </Route>
 
         <ProtectedRoute 

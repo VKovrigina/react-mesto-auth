@@ -130,7 +130,29 @@ class ApiAuth {
     })
     .then(this._handleResponse)
   }
-};
+
+  authorize(email, password) {
+    return fetch(`${this._baseUrl}/signin`,
+    {
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify({
+        'password': password,
+        'email': email,
+      })
+    })
+    .then(this._handleResponse)
+    .then((data) => {
+      // сохраняем токен
+      if (data.token) {
+        localStorage.setItem('token', data.token);
+        return data;
+      } else {
+        return;
+      }
+    })
+  }
+}
 
  
 const api = new Api(apiOptions);
