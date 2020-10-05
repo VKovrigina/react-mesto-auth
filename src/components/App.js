@@ -12,11 +12,13 @@ import Login from './Login';
 import { api, apiAuth } from '../utils/api';
 import ProtectedRoute from './ProtectedRoute';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
+import { CurrentUserEmail } from '../contexts/CurrentUserEmail';
 import { Route, Switch, Redirect, useHistory } from 'react-router-dom';
 
 function App() {
 
   const [currentUser, setCurrentUser] = React.useState(null);
+  const [currentUserEmail, setCurrentUserEmail] = React.useState('');
   const [cards, setCards] = React.useState(null); 
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
@@ -29,13 +31,13 @@ function App() {
   const history = useHistory();
 
   React.useEffect(() => {
-    tokenCheck();
     Promise.all([api.getUserInfo(), api.getInitialCards()])
     .then(([userInfo, cardsInfo]) => {
       setCurrentUser(userInfo);
       setCards(cardsInfo);
     })
     .catch(err => console.error(err));
+    tokenCheck();
   },[]);
 
   function handleEditAvatarClick() {
@@ -77,6 +79,8 @@ function App() {
       apiAuth.getContent(token)
       .then((res) => {
         if (res) {
+          console.log(res.data.email);
+          setCurrentUserEmail(res.data.email);
           setIsLoggedIn(true);
           history.push('/');
         }
@@ -178,76 +182,78 @@ function App() {
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-    <div className="page">
+      <CurrentUserEmail.Provider value={currentUserEmail}>
+        <div className="page">
 
-      <Switch>
+          <Switch>
 
-        <Route path="/sign-up">
-          <Register setIsLoggedIn={setIsLoggedIn}/>
-        </Route>
+            <Route path="/sign-up">
+              <Register setIsLoggedIn={setIsLoggedIn}/>
+            </Route>
 
-        <Route path="/sign-in">
-          <Login setIsLoggedIn={setIsLoggedIn}/>
-        </Route>
+            <Route path="/sign-in">
+              <Login setIsLoggedIn={setIsLoggedIn}/>
+            </Route>
 
-        <ProtectedRoute 
-        path="/" 
-        loggedIn={isLoggedIn} 
-        component={Main}
-        onEditAvatar={handleEditAvatarClick}
-        onEditProfile={handleEditProfileClick}
-        onAddPlace={handleAddPlaceClick}
-        onCardClick={handleCardClick}
-        initialCards={cards}
-        onCardLike={handleCardLike}
-        onCardDelete={handleDeleteCardClick} />
+            <ProtectedRoute 
+            path="/" 
+            loggedIn={isLoggedIn} 
+            component={Main}
+            onEditAvatar={handleEditAvatarClick}
+            onEditProfile={handleEditProfileClick}
+            onAddPlace={handleAddPlaceClick}
+            onCardClick={handleCardClick}
+            initialCards={cards}
+            onCardLike={handleCardLike}
+            onCardDelete={handleDeleteCardClick} />
 
-        <ProtectedRoute 
-        path="/" 
-        loggedIn={isLoggedIn} 
-        component={Footer} />
+            <ProtectedRoute 
+            path="/" 
+            loggedIn={isLoggedIn} 
+            component={Footer} />
 
-        <Route> 
-          {isLoggedIn ? <Redirect to="/" /> : <Redirect to="/sign-up" />}
-        </Route>
+            <Route> 
+              {isLoggedIn ? <Redirect to="/" /> : <Redirect to="/sign-up" />}
+            </Route>
 
-      </Switch>
+          </Switch>
 
-          {/** EditProfilePopup */}
-          { currentUser && <EditProfilePopup
-            isOpen={isEditProfilePopupOpen}
-            onClose={closeAllPopups}
-            onUpdateUser={handleUpdateUser}
-            closeByEscAndOverlay={closePopupByEscAndOverlay}/>
-          }
+              {/** EditProfilePopup */}
+              { currentUser && <EditProfilePopup
+                isOpen={isEditProfilePopupOpen}
+                onClose={closeAllPopups}
+                onUpdateUser={handleUpdateUser}
+                closeByEscAndOverlay={closePopupByEscAndOverlay}/>
+              }
 
-          {/** EditAvatarPopup */}
-          { currentUser && <EditAvatarPopup
-            isOpen={isEditAvatarPopupOpen}
-            onClose={closeAllPopups}
-            onUpdateAvatar={handleUpdateAvatar}
-            closeByEscAndOverlay={closePopupByEscAndOverlay}/>
-          }
+              {/** EditAvatarPopup */}
+              { currentUser && <EditAvatarPopup
+                isOpen={isEditAvatarPopupOpen}
+                onClose={closeAllPopups}
+                onUpdateAvatar={handleUpdateAvatar}
+                closeByEscAndOverlay={closePopupByEscAndOverlay}/>
+              }
 
-          <AddPlacePopup
-          isOpen={isAddPlacePopupOpen}
-          onClose={closeAllPopups}
-          onAddPlace={handleAddPlaceSubmit}
-          closeByEscAndOverlay={closePopupByEscAndOverlay}/>
+              <AddPlacePopup
+              isOpen={isAddPlacePopupOpen}
+              onClose={closeAllPopups}
+              onAddPlace={handleAddPlaceSubmit}
+              closeByEscAndOverlay={closePopupByEscAndOverlay}/>
 
-          <ImagePopup card={selectedCard}
-          onClose={closeAllPopups}
-          isOpen={isPhotoPopupOpen}
-          closeByEscAndOverlay={closePopupByEscAndOverlay}/>
+              <ImagePopup card={selectedCard}
+              onClose={closeAllPopups}
+              isOpen={isPhotoPopupOpen}
+              closeByEscAndOverlay={closePopupByEscAndOverlay}/>
 
-          <DeleteCardPopup
-            closeByEscAndOverlay={closePopupByEscAndOverlay}
-            onClose={closeAllPopups}
-            isOpen={isDeleteCardPopupOpen}
-            onSubmit={handleCardDelete}>
-          </DeleteCardPopup>
+              <DeleteCardPopup
+                closeByEscAndOverlay={closePopupByEscAndOverlay}
+                onClose={closeAllPopups}
+                isOpen={isDeleteCardPopupOpen}
+                onSubmit={handleCardDelete}>
+              </DeleteCardPopup>
 
-    </div>
+        </div>
+      </CurrentUserEmail.Provider>
     </CurrentUserContext.Provider>
   );
 }
