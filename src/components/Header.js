@@ -8,7 +8,7 @@ function Header({ mainPage, path, linkName }) {
   const CurrentEmail = React.useContext(CurrentUserEmail);
   const history = useHistory();
   function signOut(){
-    localStorage.removeItem('jwt');
+    localStorage.removeItem('token');
     history.push('/sign-up');
   }
 
