@@ -1,4 +1,6 @@
 .header__button {
   background-color: #000;
   border: none;
+  padding: 0;
+  margin: 0;
 }

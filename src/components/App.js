@@ -207,11 +207,6 @@ function App() {
             onCardLike={handleCardLike}
             onCardDelete={handleDeleteCardClick} />
 
-            <ProtectedRoute 
-            path="/" 
-            loggedIn={isLoggedIn} 
-            component={Footer} />
-
             <Route> 
               {isLoggedIn ? <Redirect to="/" /> : <Redirect to="/sign-up" />}
             </Route>
@@ -251,6 +246,8 @@ function App() {
                 isOpen={isDeleteCardPopupOpen}
                 onSubmit={handleCardDelete}>
               </DeleteCardPopup>
+
+              <Footer />
 
         </div>
       </CurrentUserEmail.Provider>
