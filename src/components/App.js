@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from './Header';
+// import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
 import ImagePopup from './ImagePopup';
@@ -179,8 +179,6 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
     <div className="page">
-
-    <Header />
 
       <Switch>
 

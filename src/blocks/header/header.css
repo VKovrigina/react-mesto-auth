@@ -1,11 +1,15 @@
 @import url(./__logo/header__logo.css);
+@import url(./__link/header__link.css);
+@import url(./__nav/header__nav.css);
+@import url(./__button/header__button.css);
+@import url(./__user-info/header__user-info.css);
 
 .header {
   max-width: 882px;
   width: 100%;
   position: relative;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   margin: 0 auto;
   border-bottom: 1px solid rgba(84,84,84,0.7);
 }
