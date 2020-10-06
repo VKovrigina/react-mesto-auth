@@ -1,4 +1,7 @@
+.form__title_position_center {
+  padding: 0 0 24px 0;}
+
 @media screen and (max-width: 600px) {
   .form__title_position_center {
-    padding: 0 0 35px 0;}
+    padding: 0 0 15px 0;}
 }

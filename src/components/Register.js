@@ -20,21 +20,26 @@ function Register({ setIsLoggedIn, closeByEscAndOverlay }) {
     apiAuth.authorize(values.email, values.password)
       .then((res) => {
         if (res.token) {
-          //setMessage('');
+          setMessage('');
           //console.log(res);
           setIsLoggedIn(true);
           history.push('/');
         } else {
-          //setMessage('Что-то пошло не так!');
+          setMessage('Что-то пошло не так!');
           setIsInfoTooltipOpen(true);
           setHasRegistartionError(true);
         }
       })
-      .catch(() => {
-        setMessage('Что-то пошло не так!');
+      .catch((err) => {
         console.log('Ошибка!');
         setIsInfoTooltipOpen(true);
         setHasRegistartionError(true);
+        if (err === 400){
+          setMessage("Не передано одно из полей");
+        } 
+        if (err === 401) {
+          setMessage("Некорректный пароль или email");
+        } 
       });
   }
 
@@ -44,7 +49,6 @@ function Register({ setIsLoggedIn, closeByEscAndOverlay }) {
     apiAuth.register(values.email, values.password)
       .then((res) => {
         if (res.statusCode !== 400) {
-          setMessage('');
           console.log(res);
           setIsInfoTooltipOpen(true);
           setHasRegistartionError(false);
@@ -53,13 +57,12 @@ function Register({ setIsLoggedIn, closeByEscAndOverlay }) {
           setIsInfoTooltipOpen(false);
 
         } else {
-          setMessage('Что-то пошло не так!' || res.message[0].messages[0].message);
           setIsInfoTooltipOpen(true);
           setHasRegistartionError(true);
+          setMessage("Некорректно заполнено одно из полей");
         }
       })
       .catch(() => {
-        setMessage('Что-то пошло не так!');
         console.log('Ошибка!');
         setIsInfoTooltipOpen(true);
         setHasRegistartionError(true);
@@ -72,7 +75,7 @@ function Register({ setIsLoggedIn, closeByEscAndOverlay }) {
       <section className="login-page">
         <form className="form form_type_dark form_type_full-page" onSubmit={handleSubmit} noValidate>
           <h1 className="form__title form__title_type_light form__title_position_center">Регистрация</h1>
-          <h1 className="form__title form__title_type_light form__title_position_center">{message}</h1>
+          <p className="form__error">{message}</p>
           <input
             value={values.email || ''}
             onChange={handleChange}

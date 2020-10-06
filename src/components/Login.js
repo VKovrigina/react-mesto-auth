@@ -29,9 +29,13 @@ function Login({ setIsLoggedIn }) {
           setMessage('Что-то пошло не так!');
         }
       })
-      .catch(() => {
-        setMessage('Что-то пошло не так!');
-        console.log('Ошибка!')
+      .catch((err) => {
+        if (err === 400){
+          setMessage("Не передано одно из полей");
+        } 
+        if (err === 401) {
+          setMessage("Некорректный пароль или email");
+        } 
       });
   };
 
@@ -41,7 +45,7 @@ function Login({ setIsLoggedIn }) {
       <section className="login-page">
         <form className="form form_type_dark form_type_full-page" onSubmit={handleSubmit} noValidate>
           <h1 className="form__title form__title_type_light form__title_position_center">Вход</h1>
-          <h1 className="form__title form__title_type_light form__title_position_center">{message}</h1>
+          <p className="form__error">{message}</p>
           <input
             value={values.email || ''}
             onChange={handleChange}
