@@ -11,6 +11,32 @@ function Register({ setIsLoggedIn, closeByEscAndOverlay }) {
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = React.useState(false);
   const [hasRegistartionError, setHasRegistartionError] = React.useState(false);
   const history = useHistory();
+  const {values, handleChange, errors, isValid, resetForm} = useFormWithValidation();
+  React.useEffect(() => {
+    resetForm();
+  }, [resetForm]);
+
+  function handleAuthorization() {
+    apiAuth.authorize(values.email, values.password)
+      .then((res) => {
+        if (res.token) {
+          setMessage('');
+          console.log(res);
+          setIsLoggedIn(true);
+          history.push('/');
+        } else {
+          setMessage('Что-то пошло не так!');
+          setIsInfoTooltipOpen(true);
+          setHasRegistartionError(true);
+        }
+      })
+      .catch(() => {
+        setMessage('Что-то пошло не так!');
+        console.log('Ошибка!');
+        setIsInfoTooltipOpen(true);
+        setHasRegistartionError(true);
+      });
+  }
 
   function handleSubmit (evt) {
     evt.preventDefault();
@@ -22,26 +48,8 @@ function Register({ setIsLoggedIn, closeByEscAndOverlay }) {
           console.log(res);
           setIsInfoTooltipOpen(true);
           setHasRegistartionError(false);
-          history.push('/sign-in');
-          // apiAuth.authorize(values.email, values.password)
-          //   .then((res) => {
-          //     if (res.token) {
-          //       setMessage('');
-          //       console.log(res);
-          //       setIsLoggedIn(true);
-          //       history.push('/');
-          //     } else {
-          //       setMessage('Что-то пошло не так!');
-          //       setIsInfoTooltipOpen(true);
-          //       setHasRegistartionError(true);
-          //     }
-          //   })
-          //   .catch(() => {
-          //     setMessage('Что-то пошло не так!');
-          //     console.log('Ошибка!');
-          //     setIsInfoTooltipOpen(true);
-          //     setHasRegistartionError(true);
-          //   });
+          //чтобы после регистрации сразу же прошла авторизация (как по макету), использую таймаут, чтобы сервер не ругался на множество запросов :)
+          setTimeout(handleAuthorization, 1500)
 
         } else {
           setMessage('Что-то пошло не так!' || res.message[0].messages[0].message);
@@ -56,11 +64,6 @@ function Register({ setIsLoggedIn, closeByEscAndOverlay }) {
         setHasRegistartionError(true);
       });
   };
-
-  const {values, handleChange, errors, isValid, resetForm} = useFormWithValidation();
-  React.useEffect(() => {
-    resetForm();
-  }, [resetForm]);
 
   return (
     <>
