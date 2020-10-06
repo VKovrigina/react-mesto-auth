@@ -20,12 +20,12 @@ function Register({ setIsLoggedIn, closeByEscAndOverlay }) {
     apiAuth.authorize(values.email, values.password)
       .then((res) => {
         if (res.token) {
-          setMessage('');
-          console.log(res);
+          //setMessage('');
+          //console.log(res);
           setIsLoggedIn(true);
           history.push('/');
         } else {
-          setMessage('Что-то пошло не так!');
+          //setMessage('Что-то пошло не так!');
           setIsInfoTooltipOpen(true);
           setHasRegistartionError(true);
         }
@@ -49,7 +49,8 @@ function Register({ setIsLoggedIn, closeByEscAndOverlay }) {
           setIsInfoTooltipOpen(true);
           setHasRegistartionError(false);
           //чтобы после регистрации сразу же прошла авторизация (как по макету), использую таймаут, чтобы сервер не ругался на множество запросов :)
-          setTimeout(handleAuthorization, 1500)
+          setTimeout(handleAuthorization, 1500);
+          setIsInfoTooltipOpen(false);
 
         } else {
           setMessage('Что-то пошло не так!' || res.message[0].messages[0].message);

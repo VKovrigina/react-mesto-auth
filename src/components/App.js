@@ -13,10 +13,10 @@ import { api, apiAuth } from '../utils/api';
 import ProtectedRoute from './ProtectedRoute';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import { CurrentUserEmail } from '../contexts/CurrentUserEmail';
-import { Route, Switch, Redirect, useHistory } from 'react-router-dom';
+import { Route, Switch, Redirect, useHistory, useLocation } from 'react-router-dom';
 
 function App() {
-
+  const location = useLocation();
   const [currentUser, setCurrentUser] = React.useState(null);
   const [currentUserEmail, setCurrentUserEmail] = React.useState('');
   const [cards, setCards] = React.useState(null); 
@@ -37,8 +37,11 @@ function App() {
       setCards(cardsInfo);
     })
     .catch(err => console.error(err));
-    tokenCheck();
   },[]);
+  //создаю данный эффект, чтобы текущий email был верным (при авторизации обновлять email не могу - сервер возвращает только токен)
+  React.useEffect(() => {
+    tokenCheck();
+  },[location.pathname])
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
@@ -196,16 +199,16 @@ function App() {
             </Route>
 
             <ProtectedRoute 
-            path="/" 
-            loggedIn={isLoggedIn} 
-            component={Main}
-            onEditAvatar={handleEditAvatarClick}
-            onEditProfile={handleEditProfileClick}
-            onAddPlace={handleAddPlaceClick}
-            onCardClick={handleCardClick}
-            initialCards={cards}
-            onCardLike={handleCardLike}
-            onCardDelete={handleDeleteCardClick} />
+              path="/" 
+              loggedIn={isLoggedIn} 
+              component={Main}
+              onEditAvatar={handleEditAvatarClick}
+              onEditProfile={handleEditProfileClick}
+              onAddPlace={handleAddPlaceClick}
+              onCardClick={handleCardClick}
+              initialCards={cards}
+              onCardLike={handleCardLike}
+              onCardDelete={handleDeleteCardClick} />
 
             <Route> 
               {isLoggedIn ? <Redirect to="/" /> : <Redirect to="/sign-up" />}
@@ -213,41 +216,41 @@ function App() {
 
           </Switch>
 
-              {/** EditProfilePopup */}
-              { currentUser && <EditProfilePopup
-                isOpen={isEditProfilePopupOpen}
-                onClose={closeAllPopups}
-                onUpdateUser={handleUpdateUser}
-                closeByEscAndOverlay={closePopupByEscAndOverlay}/>
-              }
+          {/** EditProfilePopup */}
+          { currentUser && <EditProfilePopup
+            isOpen={isEditProfilePopupOpen}
+            onClose={closeAllPopups}
+            onUpdateUser={handleUpdateUser}
+            closeByEscAndOverlay={closePopupByEscAndOverlay}/>
+          }
 
-              {/** EditAvatarPopup */}
-              { currentUser && <EditAvatarPopup
-                isOpen={isEditAvatarPopupOpen}
-                onClose={closeAllPopups}
-                onUpdateAvatar={handleUpdateAvatar}
-                closeByEscAndOverlay={closePopupByEscAndOverlay}/>
-              }
+          {/** EditAvatarPopup */}
+          { currentUser && <EditAvatarPopup
+            isOpen={isEditAvatarPopupOpen}
+            onClose={closeAllPopups}
+            onUpdateAvatar={handleUpdateAvatar}
+            closeByEscAndOverlay={closePopupByEscAndOverlay}/>
+          }
 
-              <AddPlacePopup
-              isOpen={isAddPlacePopupOpen}
-              onClose={closeAllPopups}
-              onAddPlace={handleAddPlaceSubmit}
-              closeByEscAndOverlay={closePopupByEscAndOverlay}/>
+          <AddPlacePopup
+            isOpen={isAddPlacePopupOpen}
+            onClose={closeAllPopups}
+            onAddPlace={handleAddPlaceSubmit}
+            closeByEscAndOverlay={closePopupByEscAndOverlay}/>
 
-              <ImagePopup card={selectedCard}
-              onClose={closeAllPopups}
-              isOpen={isPhotoPopupOpen}
-              closeByEscAndOverlay={closePopupByEscAndOverlay}/>
+          <ImagePopup card={selectedCard}
+            onClose={closeAllPopups}
+            isOpen={isPhotoPopupOpen}
+            closeByEscAndOverlay={closePopupByEscAndOverlay}/>
 
-              <DeleteCardPopup
-                closeByEscAndOverlay={closePopupByEscAndOverlay}
-                onClose={closeAllPopups}
-                isOpen={isDeleteCardPopupOpen}
-                onSubmit={handleCardDelete}>
-              </DeleteCardPopup>
+          <DeleteCardPopup
+            closeByEscAndOverlay={closePopupByEscAndOverlay}
+            onClose={closeAllPopups}
+            isOpen={isDeleteCardPopupOpen}
+            onSubmit={handleCardDelete}>
+          </DeleteCardPopup>
 
-              <Footer />
+          <Footer />
 
         </div>
       </CurrentUserEmail.Provider>
