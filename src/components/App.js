@@ -188,7 +188,7 @@ function App() {
           <Switch>
 
             <Route path="/sign-up">
-              <Register setIsLoggedIn={setIsLoggedIn}/>
+              <Register setIsLoggedIn={setIsLoggedIn} closeByEscAndOverlay={closePopupByEscAndOverlay}/>
             </Route>
 
             <Route path="/sign-in">

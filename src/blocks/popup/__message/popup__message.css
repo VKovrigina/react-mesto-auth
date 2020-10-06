@@ -1,0 +1,10 @@
+.popup__message {
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 29px;
+  text-align: center;
+  max-width: 360px;
+  margin: 32px 0 0 0;
+}

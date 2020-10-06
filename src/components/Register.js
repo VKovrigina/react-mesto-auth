@@ -3,10 +3,13 @@ import { useFormWithValidation } from '../hooks/useFormWithValidation';
 import { Link, useHistory } from 'react-router-dom';
 import { apiAuth } from '../utils/api';
 import Header from './Header';
+import InfoTooltip from './InfoTooltip';
 
-function Register({ setIsLoggedIn }) {
+function Register({ setIsLoggedIn, closeByEscAndOverlay }) {
 
   const [message, setMessage] = React.useState('');
+  const [isInfoTooltipOpen, setIsInfoTooltipOpen] = React.useState(false);
+  const [hasRegistartionError, setHasRegistartionError] = React.useState(false);
   const history = useHistory();
 
   function handleSubmit (evt) {
@@ -17,30 +20,40 @@ function Register({ setIsLoggedIn }) {
         if (res.statusCode !== 400) {
           setMessage('');
           console.log(res);
-
-          apiAuth.authorize(values.email, values.password)
-            .then((res) => {
-              if (res.token) {
-                setMessage('');
-                console.log(res);
-                setIsLoggedIn(true);
-                history.push('/');
-              } else {
-                setMessage('Что-то пошло не так!');
-              }
-            })
-            .catch(() => {
-              setMessage('Что-то пошло не так!');
-              console.log('Ошибка!')
-            });
+          setIsInfoTooltipOpen(true);
+          setHasRegistartionError(false);
+          history.push('/sign-in');
+          // apiAuth.authorize(values.email, values.password)
+          //   .then((res) => {
+          //     if (res.token) {
+          //       setMessage('');
+          //       console.log(res);
+          //       setIsLoggedIn(true);
+          //       history.push('/');
+          //     } else {
+          //       setMessage('Что-то пошло не так!');
+          //       setIsInfoTooltipOpen(true);
+          //       setHasRegistartionError(true);
+          //     }
+          //   })
+          //   .catch(() => {
+          //     setMessage('Что-то пошло не так!');
+          //     console.log('Ошибка!');
+          //     setIsInfoTooltipOpen(true);
+          //     setHasRegistartionError(true);
+          //   });
 
         } else {
           setMessage('Что-то пошло не так!' || res.message[0].messages[0].message);
+          setIsInfoTooltipOpen(true);
+          setHasRegistartionError(true);
         }
       })
       .catch(() => {
         setMessage('Что-то пошло не так!');
-        console.log('Ошибка!')
+        console.log('Ошибка!');
+        setIsInfoTooltipOpen(true);
+        setHasRegistartionError(true);
       });
   };
 
@@ -82,6 +95,9 @@ function Register({ setIsLoggedIn }) {
           </p>
 
         </form>
+
+        <InfoTooltip onClose={() => setIsInfoTooltipOpen(false)} isOpen={isInfoTooltipOpen} closeByEscAndOverlay={closeByEscAndOverlay} hasError={hasRegistartionError}/>
+
       </section>
     </>
   );
