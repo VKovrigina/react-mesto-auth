@@ -8,3 +8,11 @@
   max-width: 360px;
   margin: 32px 0 0 0;
 }
+
+@media screen and (max-width: 600px) {
+  .popup__message {
+    font-size: 20px;
+    line-height: 24px;
+    max-width: 244px;
+  }
+}

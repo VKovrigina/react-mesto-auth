@@ -1,0 +1,6 @@
+@media screen and (max-width: 600px){
+  .popup__close-button_position_center {
+    margin: 0 37px 21px 0;
+    align-self: center;
+  }
+}

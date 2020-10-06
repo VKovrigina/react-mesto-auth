@@ -14,7 +14,7 @@ function InfoTooltip({onClose, isOpen, closeByEscAndOverlay, hasError}) {
     <div className={`popup popup_form ${isOpen && `popup_open`}`}>
       <div className="popup__container">
         <button 
-          className="popup__close-button button"
+          className="popup__close-button popup__close-button_position_center button"
           type="button" 
           aria-label="Закрыть"
           onClick={onClose}>
