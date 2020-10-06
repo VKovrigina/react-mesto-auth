@@ -28,7 +28,7 @@ function InfoTooltip({onClose, isOpen, closeByEscAndOverlay, hasError}) {
           }
           {!hasError && 
             <>
-              <img className="popup__icon" src={CheckMarkIcon}></img>
+              <img className="popup__icon" src={CheckMarkIcon} alt="Регистрация прошла успешно!"></img>
               <p className="popup__message">Вы успешно зарегистрировались!</p>
             </>
           }
