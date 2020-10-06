@@ -49,7 +49,7 @@ function Register({ setIsLoggedIn, closeByEscAndOverlay }) {
     apiAuth.register(values.email, values.password)
       .then((res) => {
         if (res.statusCode !== 400) {
-          console.log(res);
+          setMessage('');
           setIsInfoTooltipOpen(true);
           setHasRegistartionError(false);
           //чтобы после регистрации сразу же прошла авторизация (как по макету), использую таймаут, чтобы сервер не ругался на множество запросов :)
@@ -63,7 +63,7 @@ function Register({ setIsLoggedIn, closeByEscAndOverlay }) {
         }
       })
       .catch(() => {
-        console.log('Ошибка!');
+        setMessage("Некорректно заполнено одно из полей");
         setIsInfoTooltipOpen(true);
         setHasRegistartionError(true);
       });
