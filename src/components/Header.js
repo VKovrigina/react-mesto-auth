@@ -18,11 +18,6 @@ function Header() {
         <ul className="header__nav">
           <Switch>
 
-            <Route path="/">
-              <li><p className="header__user-info">{ CurrentEmail &&  CurrentEmail}</p></li>
-              <li><button onClick={signOut} className="header__link header__button">Выйти</button></li> 
-            </Route>
-
             <Route path="/sign-up">
               <li><Link to="/sign-in" className="header__link">Войти</Link></li>
             </Route>
@@ -30,7 +25,12 @@ function Header() {
             <Route path="/sign-in">
               <li><Link to="/sign-up" className="header__link">Зарегистрироваться</Link></li>
             </Route>
-            
+
+            <Route path="/">
+              <li><p className="header__user-info">{ CurrentEmail &&  CurrentEmail}</p></li>
+              <li><button onClick={signOut} className="header__link header__button">Выйти</button></li> 
+            </Route>
+
           </Switch>
         </ul>
     </header>
