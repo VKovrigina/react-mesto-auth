@@ -9,7 +9,6 @@ function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick, initialCard
 
   return (
     <>
-      <Header mainPage={true} path="/" linkName="Войти"/>
       <main className="content">
 
           <section className="profile">

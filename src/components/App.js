@@ -1,5 +1,5 @@
 import React from 'react';
-// import Header from './Header';
+import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
 import ImagePopup from './ImagePopup';
@@ -187,6 +187,8 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <CurrentUserEmail.Provider value={currentUserEmail}>
         <div className="page">
+
+          <Header />
 
           <Switch>
 

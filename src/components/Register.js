@@ -71,7 +71,6 @@ function Register({ setIsLoggedIn, closeByEscAndOverlay }) {
 
   return (
     <>
-      <Header mainPage={false} path="/sign-in" linkName="Войти"/>
       <section className="login-page">
         <form className="form form_type_dark form_type_full-page" onSubmit={handleSubmit} noValidate>
           <h1 className="form__title form__title_type_light form__title_position_center">Регистрация</h1>
