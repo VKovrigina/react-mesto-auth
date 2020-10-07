@@ -5,6 +5,7 @@ import { CurrentUserEmail } from '../contexts/CurrentUserEmail';
 
 function Header() {
 
+  const [isButtonActive, setIsButtonActive] = React.useState(false);
   const CurrentEmail = React.useContext(CurrentUserEmail);
   const history = useHistory();
   function signOut(){
@@ -12,27 +13,38 @@ function Header() {
     history.push('/sign-up');
   }
 
+  function clickButton() {
+    setIsButtonActive(!isButtonActive);
+  }
+
   return (
     <header className="header">
         <img className ="header__logo" src={headerLogo}  alt="Логотип сайта Место Россия." />
-        <ul className="header__nav">
           <Switch>
 
             <Route path="/sign-up">
-              <li><Link to="/sign-in" className="header__link">Войти</Link></li>
+              <ul className="header__nav">
+                <li><Link to="/sign-in" className="header__link">Войти</Link></li>
+              </ul>
             </Route>
 
             <Route path="/sign-in">
-              <li><Link to="/sign-up" className="header__link">Зарегистрироваться</Link></li>
+              <ul className="header__nav">
+                <li><Link to="/sign-up" className="header__link">Зарегистрироваться</Link></li>
+              </ul>
             </Route>
 
             <Route path="/">
-              <li><p className="header__user-info">{ CurrentEmail &&  CurrentEmail}</p></li>
-              <li><button onClick={signOut} className="header__link header__button">Выйти</button></li> 
+              <ul className="header__nav header__nav_media-hidden">
+                <li><p className="header__user-info">{ CurrentEmail &&  CurrentEmail}</p></li>
+                <li><button onClick={signOut} className="header__link header__button">Выйти</button></li>
+              </ul>
+              <div className={`header__burger-button ${isButtonActive && `header__burger-button_active` }`} onClick={clickButton}>
+                <span className={`header__burger-button-span ${isButtonActive && `header__burger-button-span_active` }`}></span>
+              </div>
             </Route>
 
           </Switch>
-        </ul>
     </header>
   );
 }

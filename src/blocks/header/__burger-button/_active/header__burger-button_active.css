@@ -1,0 +1,9 @@
+.header__burger-button_active::before {
+  transform: rotate(45deg);
+  top: 9px;
+}
+
+.header__burger-button_active::after {
+  transform: rotate(-45deg);
+  bottom: 9px;
+}
