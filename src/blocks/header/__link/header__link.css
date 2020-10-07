@@ -14,3 +14,11 @@
   text-decoration: underline;
   cursor: pointer;
 }
+
+@media screen and (max-width: 400px) {
+  .header__link{
+    font-size: 14px;
+    line-height: 17px;
+  }
+}
+

@@ -6,3 +6,10 @@
   margin: 0;
   padding: 0 0 40.6px 0;
 }
+
+@media screen and (max-width: 768px) {
+  .header__nav{
+    flex-direction: column;
+    padding: 0 27px 31.6px 0;
+  }
+}
