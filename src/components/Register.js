@@ -3,13 +3,10 @@ import { useFormWithValidation } from '../hooks/useFormWithValidation';
 import { Link, useHistory } from 'react-router-dom';
 import { apiAuth } from '../utils/api';
 import Header from './Header';
-import InfoTooltip from './InfoTooltip';
 
-function Register({ setIsLoggedIn, closeByEscAndOverlay }) {
+function Register({ setIsLoggedIn, setIsInfoTooltipOpen, setHasRegistartionError }) {
 
   const [message, setMessage] = React.useState('');
-  const [isInfoTooltipOpen, setIsInfoTooltipOpen] = React.useState(false);
-  const [hasRegistartionError, setHasRegistartionError] = React.useState(false);
   const history = useHistory();
   const {values, handleChange, errors, isValid, resetForm} = useFormWithValidation();
   React.useEffect(() => {
@@ -21,7 +18,6 @@ function Register({ setIsLoggedIn, closeByEscAndOverlay }) {
       .then((res) => {
         if (res.token) {
           setMessage('');
-          //console.log(res);
           setIsLoggedIn(true);
           history.push('/');
         } else {
@@ -52,17 +48,18 @@ function Register({ setIsLoggedIn, closeByEscAndOverlay }) {
           setMessage('');
           setIsInfoTooltipOpen(true);
           setHasRegistartionError(false);
-          //чтобы после регистрации сразу же прошла авторизация (как по макету), использую таймаут, чтобы сервер не ругался на множество запросов :)
           setTimeout(handleAuthorization, 1500);
-          setIsInfoTooltipOpen(false);
+          //чтобы после регистрации сразу же прошла авторизация (как по макету), использую таймаут, чтобы сервер не ругался на множество запросов :)
 
         } else {
           setIsInfoTooltipOpen(true);
           setHasRegistartionError(true);
+          console.log(`${res} res`);
           setMessage("Некорректно заполнено одно из полей");
         }
       })
-      .catch(() => {
+      .catch((err) => {
+        console.log(`${err} err`);
         setMessage("Некорректно заполнено одно из полей");
         setIsInfoTooltipOpen(true);
         setHasRegistartionError(true);
@@ -101,8 +98,6 @@ function Register({ setIsLoggedIn, closeByEscAndOverlay }) {
           </p>
 
         </form>
-
-        <InfoTooltip onClose={() => setIsInfoTooltipOpen(false)} isOpen={isInfoTooltipOpen} closeByEscAndOverlay={closeByEscAndOverlay} hasError={hasRegistartionError}/>
 
       </section>
     </>

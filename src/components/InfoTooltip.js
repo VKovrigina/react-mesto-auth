@@ -8,8 +8,6 @@ function InfoTooltip({onClose, isOpen, closeByEscAndOverlay, hasError}) {
     closeByEscAndOverlay();
   })
 
-  console.log(hasError);
-
   return (
     <div className={`popup popup_form ${isOpen && `popup_open`}`}>
       <div className="popup__container">

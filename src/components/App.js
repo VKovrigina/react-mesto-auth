@@ -9,6 +9,7 @@ import AddPlacePopup from './AddPlacePopup';
 import DeleteCardPopup from './DeleteCardPopup';
 import Register from './Register';
 import Login from './Login';
+import InfoTooltip from './InfoTooltip';
 import { api, apiAuth } from '../utils/api';
 import ProtectedRoute from './ProtectedRoute';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
@@ -25,6 +26,8 @@ function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
   const [isPhotoPopupOpen, setIsPhotoPopupOpen] = React.useState(false);
   const [isDeleteCardPopupOpen, setIsDeleteCardPopupOpen] = React.useState(false);
+  const [isInfoTooltipOpen, setIsInfoTooltipOpen] = React.useState(false);
+  const [hasRegistartionError, setHasRegistartionError] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState({});
   const [cardForDelete, setCardForDelete] = React.useState({});
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
@@ -74,6 +77,7 @@ function App() {
     setIsEditAvatarPopupOpen(false);
     setIsPhotoPopupOpen(false);
     setIsDeleteCardPopupOpen(false);
+    setIsInfoTooltipOpen(false);
   }
 
   function tokenCheck() {
@@ -82,7 +86,6 @@ function App() {
       apiAuth.getContent(token)
       .then((res) => {
         if (res) {
-          console.log(res.data.email);
           setCurrentUserEmail(res.data.email);
           setIsLoggedIn(true);
           history.push('/');
@@ -193,7 +196,10 @@ function App() {
           <Switch>
 
             <Route path="/sign-up">
-              <Register setIsLoggedIn={setIsLoggedIn} closeByEscAndOverlay={closePopupByEscAndOverlay}/>
+              <Register 
+                setIsLoggedIn={setIsLoggedIn} 
+                setIsInfoTooltipOpen={setIsInfoTooltipOpen} 
+                setHasRegistartionError={setHasRegistartionError}/>
             </Route>
 
             <Route path="/sign-in">
@@ -251,6 +257,12 @@ function App() {
             isOpen={isDeleteCardPopupOpen}
             onSubmit={handleCardDelete}>
           </DeleteCardPopup>
+
+          <InfoTooltip 
+            onClose={closeAllPopups} 
+            isOpen={isInfoTooltipOpen} 
+            closeByEscAndOverlay={closePopupByEscAndOverlay} 
+            hasError={hasRegistartionError}/>
 
           <Footer />
 
