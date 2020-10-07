@@ -2,7 +2,6 @@ import React from 'react';
 import { useFormWithValidation } from '../hooks/useFormWithValidation';
 import { Link, useHistory } from 'react-router-dom';
 import { apiAuth } from '../utils/api';
-import Header from './Header';
 
 function Register({ setIsLoggedIn, setIsInfoTooltipOpen, setHasRegistartionError }) {
 
