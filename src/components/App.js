@@ -101,6 +101,9 @@ function App() {
           setIsLoggedIn(true);
           history.push('/');
         }
+      })
+      .catch((err) => {
+        console.log(`Ошибка при проверке токена: ${err}`)
       });
     }
   };

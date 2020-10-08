@@ -148,6 +148,7 @@ class ApiAuth {
         localStorage.setItem('token', data.token);
         return data;
       } else {
+        localStorage.removeItem('token');
         return;
       }
     })
