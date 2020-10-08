@@ -3,14 +3,14 @@
   background-color: #000;
   position: relative;
   display: flex;
-  flex-direction: column;/* добавила minH flex flex-direction: ;*/
+  flex-direction: column;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   min-width: 300px;
-  min-height: 90vh;
+  height: 100vh;
   padding: 0 0 60px;
 }
 

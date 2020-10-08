@@ -35,7 +35,7 @@ function Header({ handleMenu, setIsLoggedIn, setIsMenuOpen, handleButtonMenu, se
 
             <Route path="/sign-in">
               <ul className="header__nav">
-                <li><Link to="/sign-up" className="header__link">Зарегистрироваться</Link></li>
+                <li><Link to="/sign-up" className="header__link">Регистрация</Link></li>
               </ul>
             </Route>
 
