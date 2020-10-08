@@ -1,0 +1,7 @@
+.menu__container {
+  color: #fff;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+}

@@ -10,6 +10,7 @@ import DeleteCardPopup from './DeleteCardPopup';
 import Register from './Register';
 import Login from './Login';
 import InfoTooltip from './InfoTooltip';
+import Menu from './Menu';
 import { api, apiAuth } from '../utils/api';
 import ProtectedRoute from './ProtectedRoute';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
@@ -27,6 +28,7 @@ function App() {
   const [isPhotoPopupOpen, setIsPhotoPopupOpen] = React.useState(false);
   const [isDeleteCardPopupOpen, setIsDeleteCardPopupOpen] = React.useState(false);
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = React.useState(false);
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [hasRegistartionError, setHasRegistartionError] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState({});
   const [cardForDelete, setCardForDelete] = React.useState({});
@@ -78,6 +80,10 @@ function App() {
     setIsPhotoPopupOpen(false);
     setIsDeleteCardPopupOpen(false);
     setIsInfoTooltipOpen(false);
+  }
+
+  function handleMenuBlock() {
+    setIsMenuOpen(!isMenuOpen);
   }
 
   function tokenCheck() {
@@ -191,7 +197,8 @@ function App() {
       <CurrentUserEmail.Provider value={currentUserEmail}>
         <div className="page">
 
-          <Header />
+          <Menu isOpen={isMenuOpen}/>
+          <Header handleMenu={handleMenuBlock}/>
 
           <Switch>
 

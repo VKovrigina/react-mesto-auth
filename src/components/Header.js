@@ -3,7 +3,7 @@ import headerLogo from '../images/logo.svg';
 import { Route, Switch, Link, useHistory } from 'react-router-dom';
 import { CurrentUserEmail } from '../contexts/CurrentUserEmail';
 
-function Header() {
+function Header({ handleMenu }) {
 
   const [isButtonActive, setIsButtonActive] = React.useState(false);
   const CurrentEmail = React.useContext(CurrentUserEmail);
@@ -15,6 +15,7 @@ function Header() {
 
   function clickButton() {
     setIsButtonActive(!isButtonActive);
+    handleMenu();
   }
 
   return (

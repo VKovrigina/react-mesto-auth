@@ -1,0 +1,17 @@
+
+@import url(./__container/menu__container.css);
+@import url(./__link/menu__link.css);
+@import url(./__user-info/menu__user-info.css);
+@import url(./_active/menu_active.css);
+@import url(./_inactive/menu_inactive.css);
+
+.menu {
+  min-width: 320px;
+  width: 100%;
+  position: relative;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  margin: 0;
+  border-bottom: 1px solid rgba(84,84,84,0.7);
+}
