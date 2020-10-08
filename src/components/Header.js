@@ -14,7 +14,7 @@ function Header({ handleMenu, setIsLoggedIn, setIsMenuOpen, handleButtonMenu, se
     setIsLoggedIn(false);
     setIsMenuOpen(false);
     setIsButtonMenuActive(false);
-    history.push('/sign-up');
+    history.push('/sign-in');
   }
 
   function clickButton() {

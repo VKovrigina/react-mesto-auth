@@ -12,7 +12,7 @@ function Menu({isOpen, loggedIn, setIsLoggedIn, setIsMenuOpen, setIsButtonMenuAc
     setIsLoggedIn(false);
     setIsMenuOpen(false);
     setIsButtonMenuActive(false);
-    history.push('/sign-up');
+    history.push('/sign-in');
   }
 
   return (
