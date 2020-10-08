@@ -3,5 +3,8 @@
   list-style: none;
   display: flex;
   flex-direction: column;
+  align-items: center;
   font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+  margin: 40px 0;
+  padding: 0;
 }

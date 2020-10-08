@@ -1,0 +1,14 @@
+.menu__user-info{
+  color: #fff;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 22px;
+  max-width: 250px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  margin: 0 0 18px 0;
+  padding: 0;
+  text-align: center;
+}

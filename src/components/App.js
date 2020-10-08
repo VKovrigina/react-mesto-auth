@@ -29,6 +29,7 @@ function App() {
   const [isDeleteCardPopupOpen, setIsDeleteCardPopupOpen] = React.useState(false);
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = React.useState(false);
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const [isButtonMenuActive, setIsButtonMenuActive] = React.useState(false);
   const [hasRegistartionError, setHasRegistartionError] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState({});
   const [cardForDelete, setCardForDelete] = React.useState({});
@@ -84,6 +85,10 @@ function App() {
 
   function handleMenuBlock() {
     setIsMenuOpen(!isMenuOpen);
+  }
+
+  function handleButtonMenu() {
+    setIsButtonMenuActive(!isButtonMenuActive);
   }
 
   function tokenCheck() {
@@ -197,8 +202,20 @@ function App() {
       <CurrentUserEmail.Provider value={currentUserEmail}>
         <div className="page">
 
-          <Menu isOpen={isMenuOpen}/>
-          <Header handleMenu={handleMenuBlock}/>
+          <Menu 
+            isOpen={isMenuOpen} 
+            loggedIn={isLoggedIn} 
+            setIsLoggedIn={setIsLoggedIn}
+            setIsMenuOpen={setIsMenuOpen}
+            setIsButtonMenuActive={setIsButtonMenuActive}/>
+
+          <Header 
+            handleMenu={handleMenuBlock}
+            handleButtonMenu={handleButtonMenu} 
+            setIsLoggedIn={setIsLoggedIn}
+            setIsMenuOpen={setIsMenuOpen}
+            setIsButtonMenuActive={setIsButtonMenuActive}
+            isButtonMenuActive={isButtonMenuActive}/>
 
           <Switch>
 

@@ -3,18 +3,22 @@ import headerLogo from '../images/logo.svg';
 import { Route, Switch, Link, useHistory } from 'react-router-dom';
 import { CurrentUserEmail } from '../contexts/CurrentUserEmail';
 
-function Header({ handleMenu }) {
+function Header({ handleMenu, setIsLoggedIn, setIsMenuOpen, handleButtonMenu, setIsButtonMenuActive, isButtonMenuActive }) {
 
-  const [isButtonActive, setIsButtonActive] = React.useState(false);
+  
   const CurrentEmail = React.useContext(CurrentUserEmail);
   const history = useHistory();
+
   function signOut(){
     localStorage.removeItem('token');
+    setIsLoggedIn(false);
+    setIsMenuOpen(false);
+    setIsButtonMenuActive(false);
     history.push('/sign-up');
   }
 
   function clickButton() {
-    setIsButtonActive(!isButtonActive);
+    handleButtonMenu();
     handleMenu();
   }
 
@@ -40,8 +44,8 @@ function Header({ handleMenu }) {
                 <li><p className="header__user-info">{ CurrentEmail &&  CurrentEmail}</p></li>
                 <li><button onClick={signOut} className="header__link header__button">Выйти</button></li>
               </ul>
-              <div className={`header__burger-button ${isButtonActive && `header__burger-button_active` }`} onClick={clickButton}>
-                <span className={`header__burger-button-span ${isButtonActive && `header__burger-button-span_active` }`}></span>
+              <div className={`header__burger-button ${isButtonMenuActive && `header__burger-button_active` }`} onClick={clickButton}>
+                <span className={`header__burger-button-span ${isButtonMenuActive && `header__burger-button-span_active` }`}></span>
               </div>
             </Route>
 
