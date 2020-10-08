@@ -11,10 +11,12 @@
 
 .header {
   max-width: 882px;
+  min-height: 120px;
   width: 100%;
   position: relative;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin: 0 auto;
   border-bottom: 1px solid rgba(84,84,84,0.7);
 }
@@ -28,5 +30,6 @@
 @media screen and (max-width: 768px) {
   .header{
     width: 100%;
+    min-height: 84px;
   }
 }
