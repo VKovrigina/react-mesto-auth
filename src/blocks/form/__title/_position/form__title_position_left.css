@@ -2,3 +2,12 @@
   align-self: flex-start;
   padding: 20px 0 20px 35px;
 }
+
+@media screen and (max-width: 768px) {
+  .form__title_position_left {
+    align-self: center;
+    padding: 20px 0;
+    max-width: 220px;
+    text-align: center;
+  }
+}
