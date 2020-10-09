@@ -38,16 +38,6 @@ class ApiAuth {
       })
     })
     .then(this._handleResponse)
-    .then((data) => {
-      // сохраняем токен
-      if (data.token) {
-        localStorage.setItem('token', data.token);
-        return data;
-      } else {
-        localStorage.removeItem('token');
-        return;
-      }
-    })
   }
 
   getContent(token) {

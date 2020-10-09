@@ -14,6 +14,15 @@ function Register({ setIsLoggedIn, setIsInfoTooltipOpen, setHasRegistartionError
 
   function handleAuthorization() {
     apiAuth.authorize(values.email, values.password)
+      .then((data) => {
+        if (data.token) {
+          localStorage.setItem('token', data.token);
+          return data;
+        } else {
+          localStorage.removeItem('token');
+          return;
+        }
+      })
       .then((res) => {
         if (res.token) {
           setMessage('');
