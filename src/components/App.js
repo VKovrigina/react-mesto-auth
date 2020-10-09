@@ -43,7 +43,7 @@ function App() {
       setCurrentUser(userInfo);
       setCards(cardsInfo);
     })
-    .catch(err => console.error(err));
+    .catch(err => console.error(`При получении данных пользователя и карточек произошла ошибка: ${err}`));
   },[]);
   //создаю данный эффект, чтобы текущий email был верным (при авторизации обновлять email не могу - сервер возвращает только токен)
   React.useEffect(() => {
@@ -141,7 +141,7 @@ function App() {
       });
       closeAllPopups();
     })
-    .catch(err => console.error(err))
+    .catch(err => console.error(`При редактировании профиля произошла ошибка: ${err}`))
 
   }
 
@@ -154,7 +154,7 @@ function App() {
       });
       closeAllPopups();
     })
-    .catch(err => console.error(err))
+    .catch(err => console.error(`При редактировании аватара произошла ошибка: ${err}`))
 
   }
 
@@ -171,12 +171,12 @@ function App() {
       .then(newCard => {
         generateNewCards(newCard)
       })
-      .catch(err => console.error(err))
+      .catch(err => console.error(`При лайке произошла ошибка: ${err}`))
     :  api.putLike(cardId)
       .then(newCard => {
         generateNewCards(newCard)
       })
-      .catch(err => console.error(err))
+      .catch(err => console.error(`При лайке произошла ошибка: ${err}`))
   }
 
   function handleCardDelete(e) {
@@ -187,7 +187,7 @@ function App() {
       setCards(newCards);
       closeAllPopups();
     })
-    .catch(err => console.error(err))
+    .catch(err => console.error(`При удалении карточки произошла ошибка: ${err}`))
 
   }
 
@@ -196,7 +196,7 @@ function App() {
     .then(newCard => {
       setCards([newCard, ...cards]);
     })
-    .catch(err => console.error(err));
+    .catch(err => console.error(`При добавлении карточки произошла ошибка: ${err}`));
 
     closeAllPopups();
   }
