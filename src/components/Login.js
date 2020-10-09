@@ -30,7 +30,6 @@ function Login({ setIsLoggedIn }) {
       .then((res) => {
         if (res.token) {
           setMessage('');
-          console.log(res);
           setIsLoggedIn(true);
           history.push('/');
         } else {
