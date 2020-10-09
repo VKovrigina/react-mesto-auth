@@ -35,7 +35,7 @@ function Register({ setIsLoggedIn, setIsInfoTooltipOpen, setHasRegistartionError
         }
       })
       .catch((err) => {
-        console.log('Ошибка!');
+        console.error('Ошибка!');
         setIsInfoTooltipOpen(true);
         setHasRegistartionError(true);
         if (err === 400){
@@ -62,12 +62,10 @@ function Register({ setIsLoggedIn, setIsInfoTooltipOpen, setHasRegistartionError
         } else {
           setIsInfoTooltipOpen(true);
           setHasRegistartionError(true);
-          console.log(`${res} res`);
           setMessage("Некорректно заполнено одно из полей");
         }
       })
       .catch((err) => {
-        console.log(`${err} err`);
         setMessage("Некорректно заполнено одно из полей");
         setIsInfoTooltipOpen(true);
         setHasRegistartionError(true);
