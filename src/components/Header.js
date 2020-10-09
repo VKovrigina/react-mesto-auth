@@ -1,21 +1,12 @@
 import React from 'react';
 import headerLogo from '../images/logo.svg';
-import { Route, Switch, Link, useHistory } from 'react-router-dom';
+import { Route, Switch, Link } from 'react-router-dom';
 import { CurrentUserEmail } from '../contexts/CurrentUserEmail';
 
-function Header({ handleMenu, setIsLoggedIn, setIsMenuOpen, handleButtonMenu, setIsButtonMenuActive, isButtonMenuActive }) {
+function Header({ signOut, handleMenu, handleButtonMenu, isButtonMenuActive }) {
 
   
   const CurrentEmail = React.useContext(CurrentUserEmail);
-  const history = useHistory();
-
-  function signOut(){
-    localStorage.removeItem('token');
-    setIsLoggedIn(false);
-    setIsMenuOpen(false);
-    setIsButtonMenuActive(false);
-    history.push('/sign-in');
-  }
 
   function clickButton() {
     handleButtonMenu();

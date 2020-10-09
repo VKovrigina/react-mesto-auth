@@ -114,6 +114,14 @@ function App() {
     }
   };
 
+  function signOut(){
+    localStorage.removeItem('token');
+    setIsLoggedIn(false);
+    setIsMenuOpen(false);
+    setIsButtonMenuActive(false);
+    history.push('/sign-in');
+  }
+
   function closePopupByEscAndOverlay() {
     function handleEscClose(e) {
       if (e.key === "Escape") {
@@ -212,18 +220,14 @@ function App() {
         <div className="page">
 
           <Menu 
+            signOut={signOut}
             isOpen={isMenuOpen} 
-            loggedIn={isLoggedIn} 
-            setIsLoggedIn={setIsLoggedIn}
-            setIsMenuOpen={setIsMenuOpen}
-            setIsButtonMenuActive={setIsButtonMenuActive}/>
+            loggedIn={isLoggedIn}/>
 
           <Header 
+            signOut={signOut}
             handleMenu={handleMenuBlock}
-            handleButtonMenu={handleButtonMenu} 
-            setIsLoggedIn={setIsLoggedIn}
-            setIsMenuOpen={setIsMenuOpen}
-            setIsButtonMenuActive={setIsButtonMenuActive}
+            handleButtonMenu={handleButtonMenu}
             isButtonMenuActive={isButtonMenuActive}/>
 
           <Switch>

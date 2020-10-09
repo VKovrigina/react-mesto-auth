@@ -1,19 +1,9 @@
 import React from 'react';
 import { CurrentUserEmail } from '../contexts/CurrentUserEmail';
-import { useHistory } from 'react-router-dom';
 
-function Menu({isOpen, loggedIn, setIsLoggedIn, setIsMenuOpen, setIsButtonMenuActive }) {
+function Menu({ signOut, isOpen, loggedIn }) {
 
-  const history = useHistory();
   const CurrentEmail = React.useContext(CurrentUserEmail);
-
-  function signOut(){
-    localStorage.removeItem('token');
-    setIsLoggedIn(false);
-    setIsMenuOpen(false);
-    setIsButtonMenuActive(false);
-    history.push('/sign-in');
-  }
 
   return (
     <>
