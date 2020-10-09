@@ -18,6 +18,8 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import { CurrentUserEmail } from '../contexts/CurrentUserEmail';
 import { Route, Switch, Redirect, useHistory, useLocation } from 'react-router-dom';
 
+//Спасибо большое код-ревьюеру! Хорошего вам дня))
+
 function App() {
   const location = useLocation();
   const [currentUser, setCurrentUser] = React.useState(null);
