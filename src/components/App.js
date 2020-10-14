@@ -16,7 +16,7 @@ import { apiAuth } from '../utils/apiAuth';
 import ProtectedRoute from './ProtectedRoute';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import { CurrentUserEmail } from '../contexts/CurrentUserEmail';
-import { Route, Switch, Redirect, useHistory, useLocation, BrowserRouter } from 'react-router-dom';
+import { Route, Switch, Redirect, useHistory, useLocation } from 'react-router-dom';
 
 function App() {
   const location = useLocation();
@@ -215,7 +215,6 @@ function App() {
   }
 
   return (
-    <BrowserRouter basename={process.env.PUBLIC_URL}>
     <CurrentUserContext.Provider value={currentUser}>
       <CurrentUserEmail.Provider value={currentUserEmail}>
         <div className="page">
@@ -307,7 +306,6 @@ function App() {
         </div>
       </CurrentUserEmail.Provider>
     </CurrentUserContext.Provider>
-    </BrowserRouter>
   );
 }
 
