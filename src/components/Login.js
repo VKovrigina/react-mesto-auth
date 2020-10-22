@@ -1,7 +1,7 @@
 import React from 'react';
 import { useFormWithValidation } from '../hooks/useFormWithValidation';
 import { Link, useHistory } from 'react-router-dom';
-import { apiAuth } from '../utils/apiAuth';
+import { newApi } from '../utils/newApi';
 
 function Login({ setIsLoggedIn }) {
 
@@ -17,8 +17,9 @@ function Login({ setIsLoggedIn }) {
   function handleSubmit (evt) {
     evt.preventDefault();
 
-    apiAuth.authorize(values.email, values.password)
+    newApi.authorize(values.email, values.password)
       .then((data) => {
+        console.log(`ответ при авторизации ${data}`)
         if (data.token) {
           localStorage.setItem('token', data.token);
           return data;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useFormWithValidation } from '../hooks/useFormWithValidation';
 import { Link, useHistory } from 'react-router-dom';
-import { apiAuth } from '../utils/apiAuth';
+import { newApi } from '../utils/newApi';
 
 function Register({ setIsLoggedIn, setIsInfoTooltipOpen, setHasRegistartionError }) {
 
@@ -13,7 +13,7 @@ function Register({ setIsLoggedIn, setIsInfoTooltipOpen, setHasRegistartionError
   }, [resetForm]);
 
   function handleAuthorization() {
-    apiAuth.authorize(values.email, values.password)
+    newApi.authorize(values.email, values.password)
       .then((data) => {
         if (data.token) {
           localStorage.setItem('token', data.token);
@@ -50,7 +50,7 @@ function Register({ setIsLoggedIn, setIsInfoTooltipOpen, setHasRegistartionError
   function handleSubmit (evt) {
     evt.preventDefault();
 
-    apiAuth.register(values.email, values.password)
+    newApi.register(values.email, values.password)
       .then((res) => {
         if (res.statusCode !== 400) {
           setMessage('');

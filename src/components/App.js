@@ -12,7 +12,7 @@ import Login from './Login';
 import InfoTooltip from './InfoTooltip';
 import Menu from './Menu';
 import { api } from '../utils/api';
-import { apiAuth } from '../utils/apiAuth';
+import { newApi } from '../utils/newApi';
 import ProtectedRoute from './ProtectedRoute';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import { CurrentUserEmail } from '../contexts/CurrentUserEmail';
@@ -97,10 +97,10 @@ function App() {
   function tokenCheck() {
     let token = localStorage.getItem('token');
     if (token) {
-      apiAuth.getContent(token)
+      newApi.getContent(token)
       .then((res) => {
         if (res) {
-          setCurrentUserEmail(res.data.email);
+          setCurrentUserEmail(res.email);
           setIsLoggedIn(true);
           history.push('/');
         }
