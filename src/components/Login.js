@@ -19,7 +19,6 @@ function Login({ setIsLoggedIn }) {
 
     newApi.authorize(values.email, values.password)
       .then((data) => {
-        console.log(`ответ при авторизации ${data}`)
         if (data.token) {
           localStorage.setItem('token', data.token);
           return data;

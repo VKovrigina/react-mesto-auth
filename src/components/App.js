@@ -99,8 +99,9 @@ function App() {
     if (token) {
       newApi.getContent(token)
       .then((res) => {
+        console.log(res)
         if (res) {
-          setCurrentUserEmail(res.email);
+          setCurrentUserEmail(res.data.email);
           setIsLoggedIn(true);
           history.push('/');
         }
