@@ -20,5 +20,4 @@ export const newApiOptions = {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
   },
-  token: localStorage.token,
 };

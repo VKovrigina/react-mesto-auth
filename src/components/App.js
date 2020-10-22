@@ -40,13 +40,16 @@ function App() {
   const history = useHistory();
 
   React.useEffect(() => {
-    Promise.all([api.getUserInfo(), api.getInitialCards()])
-    .then(([userInfo, cardsInfo]) => {
-      setCurrentUser(userInfo);
-      setCards(cardsInfo);
-    })
-    .catch(err => console.error(`При получении данных пользователя и карточек произошла ошибка: ${err}`));
-  },[]);
+    if (isLoggedIn) {
+      Promise.all([newApi.getContent(), newApi.getInitialCards()])
+      .then(([userInfo, cardsInfo]) => {
+        console.log(cardsInfo)
+        setCurrentUser(userInfo);
+        setCards(cardsInfo);
+      })
+      .catch(err => console.error(`При получении данных пользователя и карточек произошла ошибка: ${err}`));
+    }
+  },[location.pathname]);
   //создаю данный эффект, чтобы текущий email был верным (при авторизации обновлять email не могу - сервер возвращает только токен)
   React.useEffect(() => {
     tokenCheck();
@@ -97,11 +100,14 @@ function App() {
   function tokenCheck() {
     let token = localStorage.getItem('token');
     if (token) {
+      console.log(`в if ${token}`);
       newApi.getContent(token)
       .then((res) => {
-        console.log(res)
         if (res) {
-          setCurrentUserEmail(res.data.email);
+          setCurrentUser({
+            ...currentUser,
+            email: res.email
+          });
           setIsLoggedIn(true);
           history.push('/');
         }

@@ -1,12 +1,12 @@
 import React from 'react';
 import headerLogo from '../images/logo.svg';
 import { Route, Switch, Link } from 'react-router-dom';
-import { CurrentUserEmail } from '../contexts/CurrentUserEmail';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function Header({ signOut, handleMenu, handleButtonMenu, isButtonMenuActive }) {
 
   
-  const CurrentEmail = React.useContext(CurrentUserEmail);
+  const CurrentUserInfo = React.useContext(CurrentUserContext);
 
   function clickButton() {
     handleButtonMenu();
@@ -32,7 +32,7 @@ function Header({ signOut, handleMenu, handleButtonMenu, isButtonMenuActive }) {
 
             <Route path="/">
               <ul className="header__nav header__nav_media-hidden">
-                <li><p className="header__user-info">{ CurrentEmail &&  CurrentEmail}</p></li>
+                <li><p className="header__user-info">{ CurrentUserInfo &&  CurrentUserInfo.email}</p></li>
                 <li><button onClick={signOut} className="header__link header__button">Выйти</button></li>
               </ul>
               <div className={`header__burger-button ${isButtonMenuActive && `header__burger-button_active` }`} onClick={clickButton}>

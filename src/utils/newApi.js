@@ -4,7 +4,8 @@ class NewApi {
   constructor(options) {
     this._baseUrl = options.baseUrl;
     this._headers = options.headers;
-    this._token = options.token;
+    this._token = localStorage.getItem('token');
+    console.log(this._token)
   }
 
   _handleResponse(res) {
@@ -46,9 +47,19 @@ class NewApi {
     {
       method: 'GET',
       headers: {
-        'Accept': 'application/json',
         'Content-Type': 'application/json',
         'authorization': `Bearer ${token}`,
+      }
+    })
+    .then(this._handleResponse)
+  }
+
+  getInitialCards() {
+    return fetch(`${this._baseUrl}/cards`,
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: this._token,
       }
     })
     .then(this._handleResponse)
