@@ -15,11 +15,12 @@ import { api } from '../utils/api';
 import { newApi } from '../utils/newApi';
 import ProtectedRoute from './ProtectedRoute';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
-import { Route, Switch, Redirect, useHistory } from 'react-router-dom';
+import { Route, Switch, Redirect, useHistory, useLocation } from 'react-router-dom';
 
 //Спасибо большое код-ревьюеру! Хорошего вам дня))
 
 function App() {
+  const location = useLocation();
   const [token, setToken] = React.useState(localStorage.getItem('token'));
   const [currentUser, setCurrentUser] = React.useState(null);
   const [cards, setCards] = React.useState(null); 
@@ -57,7 +58,7 @@ function App() {
         }
       });
     }
-  },[isLoggedIn]);
+  },[isLoggedIn, location.pathname]);
 
 
   function handleEditAvatarClick() {
