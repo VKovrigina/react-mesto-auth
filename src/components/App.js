@@ -15,7 +15,6 @@ import { api } from '../utils/api';
 import { newApi } from '../utils/newApi';
 import ProtectedRoute from './ProtectedRoute';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
-import { CurrentUserEmail } from '../contexts/CurrentUserEmail';
 import { Route, Switch, Redirect, useHistory } from 'react-router-dom';
 
 //Спасибо большое код-ревьюеру! Хорошего вам дня))
@@ -23,7 +22,6 @@ import { Route, Switch, Redirect, useHistory } from 'react-router-dom';
 function App() {
   const [token, setToken] = React.useState(localStorage.getItem('token'));
   const [currentUser, setCurrentUser] = React.useState(null);
-  const [currentUserEmail, setCurrentUserEmail] = React.useState('');
   const [cards, setCards] = React.useState(null); 
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
@@ -206,7 +204,6 @@ function App() {
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <CurrentUserEmail.Provider value={currentUserEmail}>
         <div className="page">
 
           <Menu 
@@ -294,7 +291,6 @@ function App() {
           <Footer />
 
         </div>
-      </CurrentUserEmail.Provider>
     </CurrentUserContext.Provider>
   );
 }
