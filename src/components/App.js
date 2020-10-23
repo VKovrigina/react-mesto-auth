@@ -148,7 +148,7 @@ function App() {
   }
 
   function handleUpdateAvatar(values) {
-    api.editAvatar(values)
+    newApi.editAvatar(values, token)
     .then(res => {
       setCurrentUser({
         ...currentUser,

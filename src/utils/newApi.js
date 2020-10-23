@@ -76,6 +76,20 @@ class NewApi {
     })
     .then(this._handleResponse)
   }
+
+  editAvatar(values, token) {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+      'authorization': `Bearer ${token}`,
+    },
+    body: JSON.stringify(
+      values
+    )
+    })
+    .then(this._handleResponse)
+  }
 }
 
 const newApi = new NewApi(newApiOptions);

@@ -34,16 +34,16 @@ class Api {
   //   .then(this._handleResponse)
   // }
 
-  editProfile(values) {
-    return fetch(`${this._baseUrl}/users/me`, {
-    method: 'PATCH',
-    headers: this._headers,
-    body: JSON.stringify(
-      values
-    )
-    })
-    .then(this._handleResponse)
-  }
+  // editProfile(values) {
+  //   return fetch(`${this._baseUrl}/users/me`, {
+  //   method: 'PATCH',
+  //   headers: this._headers,
+  //   body: JSON.stringify(
+  //     values
+  //   )
+  //   })
+  //   .then(this._handleResponse)
+  // }
 
   createCard(values) {
     return fetch(`${this._baseUrl}/cards`, {
