@@ -16,12 +16,12 @@ import { newApi } from '../utils/newApi';
 import ProtectedRoute from './ProtectedRoute';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import { CurrentUserEmail } from '../contexts/CurrentUserEmail';
-import { Route, Switch, Redirect, useHistory, useLocation } from 'react-router-dom';
+import { Route, Switch, Redirect, useHistory } from 'react-router-dom';
 
 //Спасибо большое код-ревьюеру! Хорошего вам дня))
 
 function App() {
-  const location = useLocation();
+  const [token, setToken] = React.useState(localStorage.getItem('token'));
   const [currentUser, setCurrentUser] = React.useState(null);
   const [currentUserEmail, setCurrentUserEmail] = React.useState('');
   const [cards, setCards] = React.useState(null); 
@@ -40,20 +40,27 @@ function App() {
   const history = useHistory();
 
   React.useEffect(() => {
-    if (isLoggedIn) {
-      Promise.all([newApi.getContent(), newApi.getInitialCards()])
+    if (token) {
+      Promise.all([newApi.getContent(token), newApi.getInitialCards(token)])
       .then(([userInfo, cardsInfo]) => {
-        console.log(cardsInfo)
-        setCurrentUser(userInfo);
-        setCards(cardsInfo);
+        if (userInfo) {
+          setCurrentUser(userInfo);
+          setCards(cardsInfo.data);
+          setIsLoggedIn(true);
+          history.push('/');
+        }
       })
-      .catch(err => console.error(`При получении данных пользователя и карточек произошла ошибка: ${err}`));
+      .catch((err) => {
+        if (err === 400){
+          console.error('Токен не передан или передан не в том формате');
+        } 
+        if (err === 401) {
+          console.error('Переданный токен некорректен');
+        }
+      });
     }
-  },[location.pathname]);
-  //создаю данный эффект, чтобы текущий email был верным (при авторизации обновлять email не могу - сервер возвращает только токен)
-  React.useEffect(() => {
-    tokenCheck();
-  },[location.pathname])
+  },[isLoggedIn]);
+
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
@@ -97,34 +104,8 @@ function App() {
     setIsButtonMenuActive(!isButtonMenuActive);
   }
 
-  function tokenCheck() {
-    let token = localStorage.getItem('token');
-    if (token) {
-      console.log(`в if ${token}`);
-      newApi.getContent(token)
-      .then((res) => {
-        if (res) {
-          setCurrentUser({
-            ...currentUser,
-            email: res.email
-          });
-          setIsLoggedIn(true);
-          history.push('/');
-        }
-      })
-      .catch((err) => {
-        if (err === 400){
-          console.error('Токен не передан или передан не в том формате');
-        } 
-        if (err === 401) {
-          console.error('Переданный токен некорректен');
-        }
-      });
-    }
-  };
-
   function signOut(){
-    localStorage.removeItem('token');
+    setToken(localStorage.removeItem('token'));
     setIsLoggedIn(false);
     setIsMenuOpen(false);
     setIsButtonMenuActive(false);
