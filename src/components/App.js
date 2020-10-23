@@ -134,7 +134,7 @@ function App() {
   }
 
   function handleUpdateUser(values) {
-    api.editProfile(values)
+    newApi.editProfile(values, token)
     .then(res => {
       setCurrentUser({
         ...currentUser,

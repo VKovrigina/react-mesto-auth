@@ -62,6 +62,20 @@ class NewApi {
     })
     .then(this._handleResponse)
   }
+
+  editProfile(values, token) {
+    return fetch(`${this._baseUrl}/users/me`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+      'authorization': `Bearer ${token}`,
+    },
+    body: JSON.stringify(
+      values
+    )
+    })
+    .then(this._handleResponse)
+  }
 }
 
 const newApi = new NewApi(newApiOptions);
