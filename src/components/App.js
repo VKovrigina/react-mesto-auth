@@ -194,9 +194,10 @@ function App() {
   }
 
   function handleAddPlaceSubmit(values) {
-    api.createCard(values)
+    newApi.createCard(values, token)
     .then(newCard => {
-      setCards([newCard, ...cards]);
+      console.log(newCard);
+      setCards([newCard.data, ...cards]);
     })
     .catch(err => console.error(`При добавлении карточки произошла ошибка: ${err}`));
 

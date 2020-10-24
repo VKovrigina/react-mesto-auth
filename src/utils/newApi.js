@@ -90,6 +90,20 @@ class NewApi {
     })
     .then(this._handleResponse)
   }
+
+  createCard(values, token) {
+    return fetch(`${this._baseUrl}/cards`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'authorization': `Bearer ${token}`,
+      },
+      body: JSON.stringify(
+        values
+      )
+      })
+      .then(this._handleResponse)
+  }
 }
 
 const newApi = new NewApi(newApiOptions);

@@ -64,16 +64,16 @@ class Api {
       .then(this._handleResponse)
   }
 
-  editAvatar(values) {
-    return fetch(`${this._baseUrl}/users/me/avatar`, {
-    method: 'PATCH',
-    headers: this._headers,
-    body: JSON.stringify(
-      values
-    )
-    })
-    .then(this._handleResponse)
-  }
+  // editAvatar(values) {
+  //   return fetch(`${this._baseUrl}/users/me/avatar`, {
+  //   method: 'PATCH',
+  //   headers: this._headers,
+  //   body: JSON.stringify(
+  //     values
+  //   )
+  //   })
+  //   .then(this._handleResponse)
+  // }
 
   putLike(cardId) {
     return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
