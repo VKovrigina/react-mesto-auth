@@ -183,7 +183,7 @@ function App() {
 
   function handleCardDelete(e) {
     e.preventDefault();
-    api.deleteCard(cardForDelete.id)
+    newApi.deleteCard(cardForDelete.id, token)
     .then(() => {
       const newCards = cards.filter((item) => item._id !== cardForDelete.id);
       setCards(newCards);

@@ -104,6 +104,17 @@ class NewApi {
       })
       .then(this._handleResponse)
   }
+
+  deleteCard(cardId, token) {
+    return fetch(`${this._baseUrl}/cards/${cardId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'authorization': `Bearer ${token}`,
+      },
+      })
+      .then(this._handleResponse)
+  }
 }
 
 const newApi = new NewApi(newApiOptions);
