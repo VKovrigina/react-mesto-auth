@@ -115,6 +115,28 @@ class NewApi {
       })
       .then(this._handleResponse)
   }
+
+  putLike(cardId, token) {
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'authorization': `Bearer ${token}`,
+      },
+      })
+      .then(this._handleResponse)
+  }
+
+  deleteLike(cardId, token) {
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'authorization': `Bearer ${token}`,
+      },
+      })
+      .then(this._handleResponse)
+  }
 }
 
 const newApi = new NewApi(newApiOptions);

@@ -15,7 +15,7 @@ function Card(props) {
     onCardDelete(_id);
   }
 
-  const isLiked = likes.some(i => i._id === userId);
+  const isLiked = likes.some(i => i === userId);
 
   const isOwn = owner._id === userId;
 

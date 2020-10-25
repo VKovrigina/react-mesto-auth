@@ -161,7 +161,7 @@ function App() {
   }
 
   function handleCardLike(cardId, cardLikes) {
-    const isLiked = cardLikes.some(i => i._id === currentUser._id);
+    const isLiked = cardLikes.some(i => i === currentUser._id);
 
     function generateNewCards(newCard) {
       const newCards = cards.map((item) => item._id === cardId ? newCard : item);
@@ -169,14 +169,14 @@ function App() {
     }
 
     isLiked
-    ?  api.deleteLike(cardId)
+    ?  newApi.deleteLike(cardId, token)
       .then(newCard => {
-        generateNewCards(newCard)
+        generateNewCards(newCard.data)
       })
       .catch(err => console.error(`При лайке произошла ошибка: ${err}`))
-    :  api.putLike(cardId)
+    :  newApi.putLike(cardId, token)
       .then(newCard => {
-        generateNewCards(newCard)
+        generateNewCards(newCard.data)
       })
       .catch(err => console.error(`При лайке произошла ошибка: ${err}`))
   }
