@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "e868397ae1864e9c9494e9f3478e674a",
+    "revision": "bcda2dd30553f0bcf242091d6aabc7c3",
     "url": "/react-mesto-auth/index.html"
   },
   {
-    "revision": "2ce6c2bc3f177529673b",
+    "revision": "db8930dc61a489071a57",
     "url": "/react-mesto-auth/static/css/main.988ae260.chunk.css"
   },
   {
-    "revision": "817ce50df0ba038e852b",
-    "url": "/react-mesto-auth/static/js/2.7af68ee7.chunk.js"
+    "revision": "32d3361eecfb6a634101",
+    "url": "/react-mesto-auth/static/js/2.205e7d0b.chunk.js"
   },
   {
     "revision": "c64c486544348f10a6d6c716950bc223",
-    "url": "/react-mesto-auth/static/js/2.7af68ee7.chunk.js.LICENSE.txt"
+    "url": "/react-mesto-auth/static/js/2.205e7d0b.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "2ce6c2bc3f177529673b",
-    "url": "/react-mesto-auth/static/js/main.53dde82f.chunk.js"
+    "revision": "db8930dc61a489071a57",
+    "url": "/react-mesto-auth/static/js/main.321ce37c.chunk.js"
   },
   {
-    "revision": "8f938964c218548d1516",
-    "url": "/react-mesto-auth/static/js/runtime-main.1482b755.js"
+    "revision": "24e8ba384d9cf75f1df3",
+    "url": "/react-mesto-auth/static/js/runtime-main.cbbc15b2.js"
   },
   {
     "revision": "f10ac534982d6809f220b16907c7a1db",
