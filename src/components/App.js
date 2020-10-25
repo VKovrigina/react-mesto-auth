@@ -11,7 +11,6 @@ import Register from './Register';
 import Login from './Login';
 import InfoTooltip from './InfoTooltip';
 import Menu from './Menu';
-import { api } from '../utils/api';
 import { newApi } from '../utils/newApi';
 import ProtectedRoute from './ProtectedRoute';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
