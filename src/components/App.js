@@ -20,7 +20,6 @@ import { Route, Switch, Redirect, useHistory, useLocation } from 'react-router-d
 
 function App() {
   const location = useLocation();
-  const [token, setToken] = React.useState(localStorage.getItem('token'));
   const [currentUser, setCurrentUser] = React.useState(null);
   const [cards, setCards] = React.useState(null); 
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
@@ -38,8 +37,8 @@ function App() {
   const history = useHistory();
 
   React.useEffect(() => {
-    if (token) {
-      Promise.all([newApi.getContent(token), newApi.getInitialCards(token)])
+    if (localStorage.getItem('token')) {
+      Promise.all([newApi.getContent(), newApi.getInitialCards()])
       .then(([userInfo, cardsInfo]) => {
         if (userInfo) {
           setCurrentUser(userInfo);
@@ -57,7 +56,7 @@ function App() {
         }
       });
     }
-  },[isLoggedIn, location.pathname]);
+  },[location.pathname]);
 
 
   function handleEditAvatarClick() {
@@ -103,7 +102,7 @@ function App() {
   }
 
   function signOut(){
-    setToken(localStorage.removeItem('token'));
+    localStorage.removeItem('token');
     setIsLoggedIn(false);
     setIsMenuOpen(false);
     setIsButtonMenuActive(false);
@@ -133,7 +132,7 @@ function App() {
   }
 
   function handleUpdateUser(values) {
-    newApi.editProfile(values, token)
+    newApi.editProfile(values)
     .then(res => {
       setCurrentUser({
         ...currentUser,
@@ -147,7 +146,7 @@ function App() {
   }
 
   function handleUpdateAvatar(values) {
-    newApi.editAvatar(values, token)
+    newApi.editAvatar(values)
     .then(res => {
       setCurrentUser({
         ...currentUser,
@@ -168,12 +167,12 @@ function App() {
     }
 
     isLiked
-    ?  newApi.deleteLike(cardId, token)
+    ?  newApi.deleteLike(cardId)
       .then(newCard => {
         generateNewCards(newCard.data)
       })
       .catch(err => console.error(`При лайке произошла ошибка: ${err}`))
-    :  newApi.putLike(cardId, token)
+    :  newApi.putLike(cardId)
       .then(newCard => {
         generateNewCards(newCard.data)
       })
@@ -182,7 +181,7 @@ function App() {
 
   function handleCardDelete(e) {
     e.preventDefault();
-    newApi.deleteCard(cardForDelete.id, token)
+    newApi.deleteCard(cardForDelete.id)
     .then(() => {
       const newCards = cards.filter((item) => item._id !== cardForDelete.id);
       setCards(newCards);
@@ -193,7 +192,7 @@ function App() {
   }
 
   function handleAddPlaceSubmit(values) {
-    newApi.createCard(values, token)
+    newApi.createCard(values)
     .then(newCard => {
       console.log(newCard);
       setCards([newCard.data, ...cards]);
@@ -222,7 +221,7 @@ function App() {
 
             <Route path="/sign-up">
               <Register 
-                setIsLoggedIn={setIsLoggedIn} 
+                setIsLoggedIn={setIsLoggedIn}
                 setIsInfoTooltipOpen={setIsInfoTooltipOpen} 
                 setHasRegistartionError={setHasRegistartionError}/>
             </Route>

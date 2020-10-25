@@ -27,7 +27,7 @@ function Register({ setIsLoggedIn, setIsInfoTooltipOpen, setHasRegistartionError
         if (res.token) {
           setMessage('');
           setIsLoggedIn(true);
-          history.push('/');
+          history.push('/');//сюда уже не проходит
         } else {
           setMessage('Что-то пошло не так!');
           setIsInfoTooltipOpen(true);

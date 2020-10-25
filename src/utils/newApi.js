@@ -40,35 +40,35 @@ class NewApi {
     .then(this._handleResponse)
   }
 
-  getContent(token) {
+  getContent() {
     return fetch(`${this._baseUrl}/users/me`,
     {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'authorization': `Bearer ${token}`,
+        'authorization': `Bearer ${localStorage.getItem('token')}`,
       }
     })
     .then(this._handleResponse)
   }
 
-  getInitialCards(token) {
+  getInitialCards() {
     return fetch(`${this._baseUrl}/cards`,
     {
       headers: {
         'Content-Type': 'application/json',
-        'authorization': `Bearer ${token}`,
+        'authorization': `Bearer ${localStorage.getItem('token')}`,
       }
     })
     .then(this._handleResponse)
   }
 
-  editProfile(values, token) {
+  editProfile(values) {
     return fetch(`${this._baseUrl}/users/me`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
-      'authorization': `Bearer ${token}`,
+      'authorization': `Bearer ${localStorage.getItem('token')}`,
     },
     body: JSON.stringify(
       values
@@ -77,12 +77,12 @@ class NewApi {
     .then(this._handleResponse)
   }
 
-  editAvatar(values, token) {
+  editAvatar(values) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
-      'authorization': `Bearer ${token}`,
+      'authorization': `Bearer ${localStorage.getItem('token')}`,
     },
     body: JSON.stringify(
       values
@@ -91,12 +91,12 @@ class NewApi {
     .then(this._handleResponse)
   }
 
-  createCard(values, token) {
+  createCard(values) {
     return fetch(`${this._baseUrl}/cards`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'authorization': `Bearer ${token}`,
+        'authorization': `Bearer ${localStorage.getItem('token')}`,
       },
       body: JSON.stringify(
         values
@@ -105,34 +105,34 @@ class NewApi {
       .then(this._handleResponse)
   }
 
-  deleteCard(cardId, token) {
+  deleteCard(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
-        'authorization': `Bearer ${token}`,
+        'authorization': `Bearer ${localStorage.getItem('token')}`,
       },
       })
       .then(this._handleResponse)
   }
 
-  putLike(cardId, token) {
+  putLike(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
-        'authorization': `Bearer ${token}`,
+        'authorization': `Bearer ${localStorage.getItem('token')}`,
       },
       })
       .then(this._handleResponse)
   }
 
-  deleteLike(cardId, token) {
+  deleteLike(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
-        'authorization': `Bearer ${token}`,
+        'authorization': `Bearer ${localStorage.getItem('token')}`,
       },
       })
       .then(this._handleResponse)

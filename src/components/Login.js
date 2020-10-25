@@ -16,6 +16,7 @@ function Login({ setIsLoggedIn }) {
 
   function handleSubmit (evt) {
     evt.preventDefault();
+    console.log(localStorage.getItem('token'))
 
     newApi.authorize(values.email, values.password)
       .then((data) => {
