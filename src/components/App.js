@@ -161,7 +161,7 @@ function App() {
   }
 
   function handleCardLike(cardId, cardLikes) {
-    const isLiked = cardLikes.some(i => i === currentUser._id);
+    const isLiked = cardLikes.some(i => i._id === currentUser._id);
 
     function generateNewCards(newCard) {
       const newCards = cards.map((item) => item._id === cardId ? newCard : item);
