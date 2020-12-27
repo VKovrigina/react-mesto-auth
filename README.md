@@ -16,6 +16,13 @@
     * Context
 * работа с REST API
 
+## Запуск
+npm i - установить зависимости
+
+npm run build - сборка приложения
+
+npm run start - запуск приложения
+
 ## :link: Ссылки на приложение
 
 https://vk-dev.students.nomoreparties.space 
